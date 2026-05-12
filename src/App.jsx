@@ -11,6 +11,8 @@ const MESES_FULL=['enero','febrero','marzo','abril','mayo','junio','julio','agos
 const MESES_SEM=(function(){var d=new Date();return d.getMonth()<6?MESES_S1:MESES_S2;})();
 const PCOL={'1':R,'2':W,'3':'#1A6FA8','4':G};
 const AREAS_SUG=['Vida de oración personal','Lectura bíblica','Seguimiento a Curso de Enseñanza Comunitaria','Vivencia y fidelidad a los compromisos de la Alianza','Fidelidad al Grupo Pastoral (asistencia, puntualidad, participación, sigilo, relaciones sanas, fraternidad, vida a la luz)','Participación en el culto comunitario','Fortalecimiento del carácter masculino / femenino','Vida familiar y relaciones','Servicio comunitario','Discernimiento vocacional'];
+const PPC_GOALS_DEFAULT=['Asegurar el adecuado Cuidado Pastoral de todos los miembros de la Comunidad.','Fortalecer nuestro Modo de Vida.'];
+function semLabel(s){if(!s)return s;var y=(s||'').split('-')[0];return(s||'').endsWith('S1')?'enero – junio '+y:'julio – diciembre '+y;}
 const SERVICIOS_LIST=['Administrador','CIM','Consejo de Hombres — Sector Nazaret (CDH SN)','Consejo de Hombres — Sector San Miguel (CDHS)','Consejo de la Comunidad (CDC)','Equipo de Liderazgo Femenino — Sector Nazaret (ELF SN)','Equipo de Liderazgo Femenino — Sector San Miguel (ELF SSM)','Kairós','Kerygma','MANÁ','MCU','Ministerio de Intercesión','Ministerio de Música','Ministerio de Servicios (EDS)','Moderadora de GP','MPC','Responsable Pastoral (RP)','Shemá','Sin servicio','Sión','Supervisor/a de programa o movimiento','Supervisor/a Pastoral'];
 
 const TIPOS_SUP=[
@@ -385,7 +387,7 @@ function dlHTML(html,nombre){
   }
 }
 
-function printPPG(group,ppg,rpNombre){
+function printPPG(group,ppg,rpNombre,ppcGoalsArg){
   var mb=group?(group.miembros||[]).filter(function(m){return!(m.rpOverride&&m.rpOverride===group.rpId);}):[];
   var integ=ppg.integ||mb.map(function(m){return{id:m.id,nombre:m.nombre,compromiso:'',cumple:'',aniv:'',curso:''};});
   var areas=ppg.areas||[];var prog=ppg.prog||{};var reuniones=ppg.reuniones||[];var mesesP=ppg.mesesProg&&ppg.mesesProg.length?ppg.mesesProg:MESES_SEM;
@@ -398,6 +400,7 @@ function printPPG(group,ppg,rpNombre){
   var H='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>PPG</title><style>'+CSS+'</style></head><body>';
   H+='<div class="hdr"><h1>📋 Plan Pastoral de Grupo</h1><p class="meta"><strong>Grupo:</strong> '+(group?group.nombre:'—')+'&emsp;|&emsp;<strong>RP:</strong> '+(rpNombre||'—')+'&emsp;|&emsp;<strong>Impreso:</strong> '+new Date().toLocaleDateString('es-CO')+'</p></div>';
   H+='<h2>1. Integrantes</h2><table><thead><tr><th>Nombre</th><th>Compromiso</th><th>Cumpleaños</th><th>Aniversario</th><th>Curso</th></tr></thead><tbody>'+rows1+'</tbody></table>';
+  H+='<h2>2. Plan Pastoral Comunitario (PPC)</h2><table><thead><tr><th style="width:100%">Metas comunitarias</th></tr></thead><tbody>'+(ppcGoalsArg||PPC_GOALS_DEFAULT).map(function(g,i){return'<tr><td>'+(i+1)+'. '+g+'</td></tr>';}).join('')+'</tbody></table>';
   H+='<h2>3. Áreas de trabajo</h2><table><thead><tr><th>Área</th><th>Metas</th></tr></thead><tbody>'+rows3+'</tbody></table>';
   H+='<h2>4. Programación PP</h2><table><thead><tr><th>Hermano/a</th>'+headM+'</tr></thead><tbody>'+rows4+'</tbody></table>';
   H+='<h2>5. Reuniones del GP</h2><table><thead><tr><th>Fecha</th><th>Actividad</th><th>Tema</th><th>Comentarios</th></tr></thead><tbody>'+rows5+'</tbody></table>';
@@ -1206,9 +1209,15 @@ function PPGForm(p){
   var tdS={padding:'4px 6px',borderBottom:'1px solid '+BO+'55',verticalAlign:'middle',fontSize:16};
   return (
     <div>
-      <div style={{background:P+'10',borderLeft:'4px solid '+A,borderRadius:'0 8px 8px 0',padding:'10px 14px',marginBottom:12}}><p style={{margin:0,fontSize:17,color:P,fontStyle:'italic',lineHeight:1.6}}>"Infundiré mi Espíritu en ustedes. Manténganse en mi Palabra y serán verdaderamente mis discípulos."</p><p style={{margin:'4px 0 0',fontSize:16,color:MU}}>Ez 36,26-27 · Jn 8,31-32</p></div>
+      <div style={{background:P+'10',borderLeft:'4px solid '+A,borderRadius:'0 8px 8px 0',padding:'10px 14px',marginBottom:12}}><p style={{margin:0,fontSize:17,color:P,fontStyle:'italic',lineHeight:1.6}}>"Infundiré mi Espíritu en ustedes. Manténganse en mi Palabra y serán verdaderamente mis discípulos."</p><p style={{margin:'4px 0 0',fontSize:16,color:MU}}>Ez 36,26-27 · Jn 8,31-32</p><p style={{margin:'7px 0 0',fontSize:15,color:P,fontWeight:700}}>Período: {semLabel(p.sem||CSEM)}</p></div>
       <p style={sH}>1. Integrantes del Grupo</p>
       <div style={{overflowX:'auto'}}><table style={{width:'100%',borderCollapse:'collapse'}}><thead><tr><th style={thS}>Nombre</th><th style={thS}>Compromiso</th><th style={thS}>Cumpleaños</th><th style={thS}>Aniversario</th><th style={thS}>Curso</th></tr></thead><tbody>{integ.map(function(m,i){return(<tr key={m.id}><td style={tdS}><strong>{m.nombre}</strong></td><td style={tdS}><select value={m.compromiso} onChange={function(e){uI(i,'compromiso',e.target.value);}} style={inp({minWidth:100,padding:'3px 4px'})}><option value=''>—</option><option>Inicial</option><option>En Camino</option><option>Solemne</option></select></td><td style={tdS}><input type='date' value={m.cumple} onChange={function(e){uI(i,'cumple',e.target.value);}} style={inp({minWidth:100})}/></td><td style={tdS}><input type='date' value={m.aniv} onChange={function(e){uI(i,'aniv',e.target.value);}} style={inp({minWidth:100})}/></td><td style={tdS}><select value={m.curso} onChange={function(e){uI(i,'curso',e.target.value);}} style={inp({minWidth:160,padding:'3px 4px'})}><option value=''>— Sin asignar —</option><option>Fundamentos I</option><option>Relaciones Personales Cristianas</option><option>IVC o Cómo recibir Pastoreo</option><option>Fruto del Espíritu Santo</option><option>Comunidad y Familia</option><option>Emociones en la Vida Cristiana</option><option>F2: Matrimonios</option><option>F2: Solteros "Entrando a nuestro estado de vida"</option><option>F2: H. Casados / F2: M. Casadas</option><option>F2: H. Solteros / F2: M. Solteras</option><option>Paternidad Cristiana</option><option>F3: Nuestro Llamado</option><option>F3: Visión para la Cdad. Cristiana</option><option>Servicio Cristiano</option><option>F3: Nuestro Modo de Vida</option><option>Carácter Masculino / Carácter Femenino</option><option>F4: Viviendo en Comunidad Cristiana</option><option>Normas y Políticas Comunitarias</option><option>Doctrina Cristiana</option><option>La Constitución de Emmanuel / Nuestra Espiritualidad Carismática</option><option>Doctrina y Ecumenismo - Versión Católica</option><option>Doctrina y Ecumenismo - Versión Ecuménica</option></select></td></tr>);})}</tbody></table></div>
+      <p style={sH}>2. Plan Pastoral Comunitario (PPC)</p>
+      <div style={{background:P+'08',border:'1px solid '+P+'33',borderRadius:8,padding:'10px 14px',marginBottom:6}}>
+        <p style={{margin:'0 0 8px',fontSize:16,color:MU,fontStyle:'italic'}}>Metas comunitarias para {semLabel(p.sem||CSEM)}:</p>
+        {(p.ppcGoals||PPC_GOALS_DEFAULT).map(function(g,i){return(<div key={i} style={{display:'flex',alignItems:'flex-start',gap:8,padding:'7px 0',borderBottom:i===0?'1px solid '+BO:'none'}}><span style={{fontWeight:700,color:P,fontSize:17,flexShrink:0}}>{i+1}.</span><span style={{fontSize:17,color:'#071F33',lineHeight:1.5}}>{g}</span></div>);})}
+        <p style={{margin:'8px 0 0',fontSize:14,color:MU,fontStyle:'italic'}}>Definidas por el Equipo Coordinador para toda la Comunidad Emmanuel.</p>
+      </div>
       <p style={sH}>3. Áreas de trabajo y metas pastorales</p>
       <button onClick={function(){setShowSugg(!showSugg);}} style={{width:'100%',background:P+'10',border:'1px dashed '+P+'44',borderRadius:8,padding:'7px 12px',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:6,color:P,fontSize:17,fontWeight:600}}>
         <span>💡 Áreas sugeridas que podrías trabajar en tu GP (escoge 3 a 5) <span style={{fontSize:14,background:P+'18',color:P,borderRadius:10,padding:'1px 7px',fontWeight:700,marginLeft:4}}>{areas.filter(function(a){return AREAS_SUG.map(function(s){return s.toLowerCase();}).includes((a.area||'').toLowerCase());}).length} / {AREAS_SUG.length}</span></span>
@@ -1247,7 +1256,7 @@ function PPGForm(p){
         <div><div style={{fontSize:17,fontWeight:700,color:W,marginBottom:4}}>🔧 Lo que debemos mejorar</div><textarea value={evalMejorar} onChange={function(e){setEvalMejorar(e.target.value);}} style={inp({minHeight:72,resize:'vertical'})} placeholder='Aspectos a fortalecer...'/></div>
       </div>
       <Btn variant='success' onClick={save} style={{width:'100%',padding:12,marginTop:16}}>{ok?'✅ PPG Guardado':'💾 Guardar Plan Pastoral de Grupo'}</Btn>
-      <Btn variant='outline' onClick={function(){printPPG(group,{integ:integ,areas:areas,prog:prog,reuniones:reuns,evalBien:evalBien,evalMejorar:evalMejorar},p.rpNombre||'');}} style={{width:'100%',padding:11,marginTop:8}}>⬇️ Descargar PPG</Btn>
+      <Btn variant='outline' onClick={function(){printPPG(group,{integ:integ,areas:areas,prog:prog,reuniones:reuns,evalBien:evalBien,evalMejorar:evalMejorar},p.rpNombre||'',p.ppcGoals||PPC_GOALS_DEFAULT);}} style={{width:'100%',padding:11,marginTop:8}}>⬇️ Descargar PPG</Btn>
     </div>
   );
 }
@@ -1273,7 +1282,7 @@ function PPPForm(p){
   SECCIONES_PPP.forEach(function(sec){(autoeval[sec.key]||[]).forEach(function(row){if(row.puntaje==='1')criticas.push({sec:sec.title.split('.')[1]?sec.title.split('.')[1].trim():sec.title,item:row.item});if(row.puntaje==='2')importantes.push({sec:sec.title.split('.')[1]?sec.title.split('.')[1].trim():sec.title,item:row.item});});});
   return (
     <div>
-      <div style={{background:P+'10',borderLeft:'4px solid '+A,borderRadius:'0 8px 8px 0',padding:'10px 14px',marginBottom:12}}><p style={{margin:0,fontWeight:700,fontSize:18,color:P}}>Plan Pastoral Individual</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>Período: julio – diciembre 2026</p></div>
+      <div style={{background:P+'10',borderLeft:'4px solid '+A,borderRadius:'0 8px 8px 0',padding:'10px 14px',marginBottom:12}}><p style={{margin:0,fontWeight:700,fontSize:18,color:P}}>Plan Pastoral Individual</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>Período: {semLabel(p.sem||CSEM)}</p></div>
       <Card style={{marginBottom:10}}>
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:6,fontSize:17}}>
           <div><span style={{color:MU,fontWeight:600}}>Nombre: </span><strong>{mb.nombre}</strong></div>
@@ -1344,8 +1353,8 @@ function MiGrupo(p){
           if(m.rpOverride&&m.rpOverride!==user.id){return(<Card key={m.id} style={{marginBottom:10,borderLeft:'3px solid '+MU}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:8}}><div><p style={{margin:0,fontWeight:700,fontSize:18,color:'#071F33'}}>{m.nombre}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>Asiste a este GP · PP a cargo de otro/a RP</p></div><span style={{background:MU+'22',color:MU,fontSize:16,padding:'2px 8px',borderRadius:20,fontWeight:600}}>PP: {ovU?ovU.nombre.split(' ')[0]:'otro RP'}</span></div>{evs.length>0&&(<div style={{display:'flex',justifyContent:'space-around',padding:'6px 0',borderTop:'1px solid '+BO,borderBottom:'1px solid '+BO,marginBottom:8}}><Donut pct={attPct(m.id,'Asamblea de Oración')} label="Asambleas"/><Donut pct={attPct(m.id,'Reunión del Grupo Pastoral')} label="Grupo"/><Donut pct={attPct(m.id,'Retiro')} label="Retiro"/><Donut pct={attPct(m.id,'Curso')} label="Curso"/></div>)}<p style={{fontSize:15,color:MU,margin:0,fontStyle:'italic'}}>Los Pastoreos Personales los gestiona {ovU?ovU.nombre:'el/la RP asignado/a'}.</p></Card>);}
           return(<Card key={m.id} style={{marginBottom:10}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:8}}><div><p style={{margin:0,fontWeight:700,fontSize:18,color:'#071F33'}}>{m.nombre}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>Última reunión: {l?fmt(l.fechaReal):'Sin registros'}</p></div><span style={{background:s.cl+'22',color:s.cl,fontSize:16,padding:'2px 8px',borderRadius:20,fontWeight:600}}>{s.lb}</span></div><div style={{marginBottom:8}}><div style={{display:'flex',justifyContent:'space-between',marginBottom:4}}><span style={{fontSize:16,color:MU}}>Pastoreos este semestre</span><span style={{fontSize:16,fontWeight:700}}>{n}/4</span></div><Bar val={n} max={4} color={n>=4?G:n>=2?W:R}/></div>{evs.length>0&&(<div style={{display:'flex',justifyContent:'space-around',padding:'6px 0',borderTop:'1px solid '+BO,borderBottom:'1px solid '+BO,marginBottom:8}}><Donut pct={attPct(m.id,'Asamblea de Oración')} label="Asambleas"/><Donut pct={attPct(m.id,'Reunión del Grupo Pastoral')} label="Grupo"/><Donut pct={attPct(m.id,'Retiro')} label="Retiro"/><Donut pct={attPct(m.id,'Curso')} label="Curso"/></div>)}<div style={{display:'flex',gap:8}}><Btn small onClick={function(){p.setFor(m.id);p.go('agendar');}}>📅 Agendar</Btn><Btn small variant='outline' onClick={function(){setTab('ppp');setSelMb(m.id);}}>📝 PPP</Btn></div></Card>);})}
         {tab==='hermanos'&&(function(){var cargoMb=mb.filter(function(m){return m.rpOverride&&m.rpOverride===user.id&&!m.userId;});if(!cargoMb.length)return null;var genHerm=user.genero==='F'?'Hermanas':'Hermanos';return(<div style={{marginTop:16}}><p style={{fontSize:17,fontWeight:700,color:A,margin:'0 0 8px',paddingBottom:4,borderBottom:'1px solid '+A+'33'}}>👥 {genHerm} que tengo a mi cargo y no están en mi GP</p>{cargoMb.map(function(m){var n=cnt(m.id),l=lastM(m.id),s=stMb(m.id);return(<Card key={m.id} style={{marginBottom:10,borderLeft:'3px solid '+A}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:8}}><div><p style={{margin:0,fontWeight:700,fontSize:18,color:'#071F33'}}>{m.nombre}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>PP a tu cargo · Asiste a GP de {(function(){var n=getAttendingRPNombre(m.nombre,group.id,dynGroups,allUsers);return n||'otro RP';})()}</p></div><span style={{background:s.cl+'22',color:s.cl,fontSize:16,padding:'2px 8px',borderRadius:20,fontWeight:600}}>{s.lb}</span></div><div style={{marginBottom:8}}><div style={{display:'flex',justifyContent:'space-between',marginBottom:4}}><span style={{fontSize:16,color:MU}}>Pastoreos este semestre</span><span style={{fontSize:16,fontWeight:700}}>{n}/4</span></div><Bar val={n} max={4} color={n>=4?G:n>=2?W:R}/></div>{evs.length>0&&(<div style={{display:'flex',justifyContent:'space-around',padding:'6px 0',borderTop:'1px solid '+BO,borderBottom:'1px solid '+BO,marginBottom:8}}><Donut pct={attPct(m.id,'Asamblea de Oración')} label="Asambleas"/><Donut pct={getExternalGPPct(m.nombre,group.id,dynGroups,allAtt2)} label="Grupo"/><Donut pct={attPct(m.id,'Retiro')} label="Retiro"/><Donut pct={attPct(m.id,'Curso')} label="Curso"/></div>)}<div style={{display:'flex',gap:8}}><Btn small onClick={function(){p.setFor(m.id);p.go('agendar');}}>📅 Agendar</Btn><Btn small variant='outline' onClick={function(){setTab('ppp');setSelMb(m.id);}}>📝 PPP</Btn></div></Card>);})}</div>);})()}
-        {tab==='ppg'&&<PPGForm group={group} ppg={plans.ppg||{}} rpNombre={user.nombre} user={user} meetings={meetings} users={allUsers} addSelf={dynGroups.some(function(g){return g.id!==group.id&&g.miembros.some(function(m){return m.userId===user.id;});})} onSave={function(d){p.savePlan('ppg',null,d);}}/>}
-        {tab==='ppp'&&(<div><p style={{fontSize:18,color:MU,marginBottom:10}}>Plan Pastoral Personal por hermano/a.</p><select value={selMb} onChange={function(e){setSelMb(e.target.value);}} style={inp({marginBottom:12})}><option value=''>— Selecciona un hermano/a —</option>{mb.filter(function(m){return !m.rpOverride||m.rpOverride===user.id;}).map(function(m){return <option key={m.id} value={m.id}>{m.nombre}</option>;})}</select>{selMb&&(<PPPForm key={selMb} miembro={mb.find(function(m){return m.id===selMb;})} user={user} group={group} saved={plans.miembros&&plans.miembros[selMb]&&typeof plans.miembros[selMb]==='object'?plans.miembros[selMb]:{}} onSave={function(d){p.savePlan('miembro',selMb,d);}}/>)}</div>)}
+        {tab==='ppg'&&<PPGForm group={group} ppg={plans.ppg||{}} rpNombre={user.nombre} user={user} meetings={meetings} users={allUsers} addSelf={dynGroups.some(function(g){return g.id!==group.id&&g.miembros.some(function(m){return m.userId===user.id;});})} onSave={function(d){p.savePlan('ppg',null,d);}} sem={p.sem} ppcGoals={p.ppcGoals}/>}
+        {tab==='ppp'&&(<div><p style={{fontSize:18,color:MU,marginBottom:10}}>Plan Pastoral Personal por hermano/a.</p><select value={selMb} onChange={function(e){setSelMb(e.target.value);}} style={inp({marginBottom:12})}><option value=''>— Selecciona un hermano/a —</option>{mb.filter(function(m){return !m.rpOverride||m.rpOverride===user.id;}).map(function(m){return <option key={m.id} value={m.id}>{m.nombre}</option>;})}</select>{selMb&&(<PPPForm key={selMb} miembro={mb.find(function(m){return m.id===selMb;})} user={user} group={group} saved={plans.miembros&&plans.miembros[selMb]&&typeof plans.miembros[selMb]==='object'?plans.miembros[selMb]:{}} onSave={function(d){p.savePlan('miembro',selMb,d);}} sem={p.sem}/>)}</div>)}
         {tab==='asist'&&<Asistencia mb={mb} att={att} onSave={p.saveAtt} gId={group.id} dynGroups={dynGroups}/>}
       </div>
     </div>
@@ -1356,7 +1365,7 @@ function MiGrupo(p){
 function Cadena(p){
   var user=p.user,supMtgs=p.supMeetings||[],role=mrole(user);
   var dynUsers=p.users||USERS;
-  var canSched=(role==='sup'||role==='cds'||role==='admin')&&!hasR(user,'responsable_sector');
+  var canSched=(role==='sup'||role==='cds'||role==='admin');
   var [showForm,setShowForm]=useState(false);
   var [selId,setSelId]=useState(null);
   var [rNotas,setRNotas]=useState('');
@@ -1372,12 +1381,18 @@ function Cadena(p){
   var [savedOk,setSavedOk]=useState(false);
   var availTipos=(function(){
     if(hasR(user,'supervisor_cds')){var sc2=TIPOS_SUP.filter(function(t){return t.id==='sup_cds';});var rest=TIPOS_SUP.filter(function(t){return t.id!=='sup_cds';});return sc2.concat(rest);}
-    return TIPOS_SUP.filter(function(t){if(t.id==='sup_cds')return false;if(role==='sup')return t.id!=='retro1';if(role==='cds')return t.id==='retro1';if(role==='admin')return true;return false;});
+    return TIPOS_SUP.filter(function(t){if(t.id==='sup_cds')return false;if(role==='sup')return t.id!=='retro1';if(role==='cds'){if(hasR(user,'responsable_sector'))return t.id==='sup_rp';return t.id==='retro1';}if(role==='admin')return true;return false;});
   })();
   function getOpts(tipo){
     if(tipo==='sup_cds'){if(user.id==='u_rene')return dynUsers.filter(function(u){return u.id==='u_german';});if(user.id==='u_alejo')return dynUsers.filter(function(u){return u.id==='u_carlos';});return[];}
     if(tipo==='retro1')return dynUsers.filter(function(u){return u.roles&&u.roles.includes('supervisor')&&u.sector===user.sector&&u.activo!==false;});
-    return dynUsers.filter(function(u){return u.supId===user.id&&u.activo!==false&&!hasR(u,'servidor_mayor');});
+    var directSupervisees=dynUsers.filter(function(u){return u.supId===user.id&&u.activo!==false&&!hasR(u,'servidor_mayor');});
+    if(hasR(user,'responsable_sector')){
+      var cdsList=dynUsers.filter(function(u){return hasR(u,'coordinador_sector')&&u.sector===user.sector&&u.activo!==false;});
+      var nonCds=directSupervisees.filter(function(u){return!hasR(u,'coordinador_sector');});
+      return cdsList.concat(nonCds);
+    }
+    return directSupervisees;
   }
   function partFieldLabel(tipo){if(tipo==='sup_cds')return'Coordinador de Sector *';if(tipo==='retro1')return'Supervisor/a *';return'Responsable Pastoral *';}
   function getTipo(id){return TIPOS_SUP.find(function(t){return t.id===id;})||TIPOS_SUP[0];}
@@ -1395,8 +1410,10 @@ function Cadena(p){
   function save(){
     if(!fPart||!fFecha)return;
     var pu=dynUsers.find(function(u){return u.id===fPart;});
-    var tipoFinal=pu&&pu.roles&&pu.roles.includes('coordinador_sector')?'sup_cds':fTipo;
-    p.onAdd({id:uid(),tipo:tipoFinal,fecha:fFecha,hora:fHora,modalidad:fMod,lugar:fLugar,notas:fNotas,semestre:CSEM,sector:user.sector||(pu?pu.sector:''),supId:tipoFinal==='sup_cds'?user.id:(role==='sup'?user.id:(tipoFinal==='retro1'?fPart:'')),rpId:tipoFinal==='sup_cds'?fPart:(role==='sup'?fPart:''),cdsId:role==='cds'?user.id:(tipoFinal==='sup_cds'?fPart:''),partNombre:pu?pu.nombre:'',realizada:false});
+    var tipoFinal=(hasR(user,'supervisor_cds')&&pu&&pu.roles&&pu.roles.includes('coordinador_sector'))?'sup_cds':fTipo;
+    var isRS=hasR(user,'responsable_sector');
+    var actsSup=(role==='sup'||isRS);
+    p.onAdd({id:uid(),tipo:tipoFinal,fecha:fFecha,hora:fHora,modalidad:fMod,lugar:fLugar,notas:fNotas,semestre:CSEM,sector:user.sector||(pu?pu.sector:''),supId:tipoFinal==='sup_cds'?user.id:(actsSup?user.id:(tipoFinal==='retro1'?fPart:'')),rpId:tipoFinal==='sup_cds'?fPart:(actsSup?fPart:''),cdsId:role==='cds'?user.id:(tipoFinal==='sup_cds'?fPart:''),partNombre:pu?pu.nombre:'',realizada:false});
     setShowForm(false);setFPart('');setFNotas('');setFLugar('');
     setSavedOk(true);setTimeout(function(){setSavedOk(false);},2500);
   }
@@ -1516,7 +1533,24 @@ function Supervision(p){
   if(role==='sup')rps=rps.filter(function(u){return u.supId===user.id;});
   else if(role==='cds')rps=rps.filter(function(u){return u.sector===user.sector;});
   else if(admin)rps=rps.filter(function(u){return u.sector===sector;});
-  function st(rp){var g=dynGroups.find(function(x){return x.rpId===rp.id;});if(!g)return{mb:0,real:0,meta:0,pct:0,gn:'Sin grupo'};var mb=g.miembros.filter(function(m){return !m.rpOverride;}).length,real=semR.filter(function(m){return m.rpId===rp.id;}).length,meta=mb*4;return{mb:mb,real:real,meta:meta,pct:meta>0?Math.round(real/meta*100):0,gn:g.nombre};}
+  // Para RS: añadir también usuarios sin rol 'responsable' que tienen miembros con rpOverride apuntando a ellos
+  if(hasR(user,'responsable_sector')||admin){
+    var checkSector=admin?sector:user.sector;
+    var extraRPs=[];
+    dynGroups.forEach(function(g){g.miembros.forEach(function(m){if(m.rpOverride){var rpU=dynUsers.find(function(u){return u.id===m.rpOverride;});if(rpU&&rpU.activo!==false&&rpU.sector===checkSector&&!rps.some(function(r){return r.id===rpU.id;})&&!extraRPs.some(function(r){return r.id===rpU.id;}))extraRPs.push(rpU);}});});
+    rps=rps.concat(extraRPs);
+  }
+  function st(rp){
+    var g=dynGroups.find(function(x){return x.rpId===rp.id;});
+    var overrideMb=[];
+    dynGroups.forEach(function(gr){gr.miembros.forEach(function(m){if(m.rpOverride===rp.id&&(!g||gr.id!==g.id))overrideMb.push(m);});});
+    if(!g&&overrideMb.length===0)return{mb:0,real:0,meta:0,pct:0,gn:'Sin grupo',noGP:true};
+    var mbOwn=g?g.miembros.filter(function(m){return !m.rpOverride;}).length:0;
+    var mb=mbOwn+overrideMb.length;
+    var real=semR.filter(function(m){return m.rpId===rp.id;}).length,meta=mb*4;
+    var gn=g?g.nombre:('Sin GP · '+overrideMb.map(function(m){return m.nombre.split(' ')[0];}).join(', '));
+    return{mb:mb,real:real,meta:meta,pct:meta>0?Math.round(real/meta*100):0,gn:gn,noGP:!g};
+  }
   var tM=rps.reduce(function(a,r){return a+st(r).meta;},0),tR=rps.reduce(function(a,r){return a+st(r).real;},0),gP=tM>0?Math.round(tR/tM*100):0;
   if(verGrupo)return <ViewGrupo group={verGrupo.group} rpId={verGrupo.rpId} rpNombre={verGrupo.rpNombre} allPlans={allPlans} allAtt={allAtt} meetings={meetings} addSelf={dynGroups.some(function(g){return g.id!==verGrupo.group.id&&g.miembros.some(function(m){return m.userId===verGrupo.rpId;});})} onBack={function(){setVerGrupo(null);}}/>;
   var TABS=isRp?[{id:'cadena',lb:'🔄 Mis Reuniones'}]:[{id:'panel',lb:'📊 Panel'},{id:'cadena',lb:'🔄 Ciclo de Supervisión'}];
@@ -1533,7 +1567,16 @@ function Supervision(p){
           {!admin&&(role==='sup'||role==='cds')&&(<div style={{marginBottom:12,textAlign:'right'}}><Btn small variant='accent' onClick={function(){printReporte(user.sector||'Sector',rps,dynGroups,meetings,allPlans,allAtt);}}>⬇️ Reporte semestral</Btn></div>)}
           <Card style={{marginBottom:14}}><p style={{margin:'0 0 8px',fontWeight:700,fontSize:18}}>{admin?'Sector '+sector:role==='sup'?'Mi Cadena':'Sector '+user.sector}</p><div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:10,textAlign:'center',marginBottom:8}}><div><div style={{fontSize:27,fontWeight:700,color:P}}>{rps.length}</div><div style={{fontSize:15,color:MU}}>Responsables</div></div><div><div style={{fontSize:27,fontWeight:700,color:G}}>{tR}</div><div style={{fontSize:15,color:MU}}>Realizadas</div></div><div><div style={{fontSize:27,fontWeight:700,color:A}}>{gP}%</div><div style={{fontSize:15,color:MU}}>Meta global</div></div></div><Bar val={tR} max={tM||1} color={gP>=80?G:gP>=50?A:R}/></Card>
           <p style={{fontSize:18,fontWeight:700,color:'#0A3D62',margin:'16px 0 8px',paddingBottom:4,borderBottom:'1px solid #0A3D6233'}}>🔄 MIS RESPONSABILIDADES DE SUPERVISIÓN</p>
-          {rps.map(function(rp){var s=st(rp),grp=dynGroups.find(function(x){return x.rpId===rp.id;});return(<Card key={rp.id} style={{marginBottom:10}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:6}}><div><p style={{margin:0,fontWeight:700,fontSize:18}}>{rp.nombre}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>{s.gn} · {s.mb} hermanos/as</p></div><div style={{textAlign:'right'}}><div style={{fontSize:20,fontWeight:700,color:s.pct>=100?G:s.pct>=50?W:R}}>{s.pct}%</div><div style={{fontSize:15,color:MU}}>{s.real}/{s.meta}</div></div></div><Bar val={s.real} max={s.meta||1} color={s.pct>=100?G:s.pct>=50?A:R}/>{grp&&<div style={{marginTop:8}}><Btn small variant='outline' onClick={function(){setVerGrupo({rpId:rp.id,rpNombre:rp.nombre,group:grp});}}>📂 Ver grupo completo</Btn></div>}</Card>);})}
+          {(function(){var supMtgsList=p.supMeetings||[];return rps.map(function(rp){var s=st(rp),grp=dynGroups.find(function(x){return x.rpId===rp.id;});
+            var cicloTipos=[{id:'sup_rp',ic:'👤',lb:'Sup. RP'},{id:'sup_gp',ic:'👥',lb:'Sup. GP'},{id:'retro1',ic:'🔄',lb:'Retro 1'},{id:'retro2',ic:'📋',lb:'Retro 2'}];
+            var cicloStatus=cicloTipos.map(function(ct){
+              var rpId2=ct.id==='retro1'?null:rp.id;
+              var supIdChk=ct.id==='retro1'?rp.supId:null;
+              var done=supMtgsList.some(function(sm){return sm.semestre===CSEM&&sm.tipo===ct.id&&sm.realizada&&(rpId2?sm.rpId===rpId2:sm.supId===supIdChk);});
+              var pend=supMtgsList.some(function(sm){return sm.semestre===CSEM&&sm.tipo===ct.id&&!sm.realizada&&(rpId2?sm.rpId===rpId2:sm.supId===supIdChk);});
+              return{id:ct.id,ic:ct.ic,lb:ct.lb,done:done,pend:pend};
+            });
+            return(<Card key={rp.id} style={{marginBottom:10}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:6}}><div><p style={{margin:0,fontWeight:700,fontSize:18}}>{rp.nombre}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>{s.gn} · {s.mb} hermanos/as</p></div><div style={{textAlign:'right'}}><div style={{fontSize:20,fontWeight:700,color:s.pct>=100?G:s.pct>=50?W:R}}>{s.pct}%</div><div style={{fontSize:15,color:MU}}>{s.real}/{s.meta} PP</div></div></div><Bar val={s.real} max={s.meta||1} color={s.pct>=100?G:s.pct>=50?A:R}/><div style={{display:'flex',gap:4,flexWrap:'wrap',marginTop:8}}>{cicloStatus.map(function(cs){return(<span key={cs.id} style={{fontSize:13,padding:'2px 8px',borderRadius:20,fontWeight:600,background:cs.done?G+'22':cs.pend?W+'22':BO+'88',color:cs.done?G:cs.pend?W:MU,whiteSpace:'nowrap'}}>{cs.ic} {cs.done?'✓ ':cs.pend?'⏳ ':'— '}{cs.lb}</span>);})}</div>{grp&&<div style={{marginTop:8}}><Btn small variant='outline' onClick={function(){setVerGrupo({rpId:rp.id,rpNombre:rp.nombre,group:grp});}}>📂 Ver grupo completo</Btn></div>}</Card>);})})()}
         </div>
       )}
       {tab==='cadena'&&(<div style={{padding:'0 0 100px'}}><Cadena user={user} supMeetings={p.supMeetings} onAdd={p.onAddSup} onUpdate={p.onUpdSup} users={dynUsers}/></div>)}
@@ -1677,6 +1720,17 @@ function Admin(p){
             {!pLabel&&<p style={{fontSize:15,color:MU,fontStyle:'italic'}}>Escribe el ID del periodo para continuar.</p>}
           </Card>
         )}
+        {/* Metas PPC */}
+        <p style={{fontSize:17,fontWeight:700,color:P,margin:'20px 0 8px',paddingBottom:4,borderBottom:'2px solid '+P+'33'}}>📌 Metas del Plan Pastoral Comunitario (PPC)</p>
+        <p style={{fontSize:15,color:MU,margin:'0 0 10px'}}>Estas metas se muestran en el PPG de todos los RPs. Actualízalas cuando cambien al inicio de cada año.</p>
+        {(p.ppcGoals||PPC_GOALS_DEFAULT).map(function(g,i){return(
+          <Card key={i} style={{marginBottom:8}}>
+            <div style={{fontSize:15,color:MU,fontWeight:600,marginBottom:4}}>Meta {i+1}</div>
+            <div style={{display:'flex',gap:8,alignItems:'center'}}>
+              <textarea value={g} onChange={function(e){var n=(p.ppcGoals||[]).slice();n[i]=e.target.value;if(p.onSetPpcGoals)p.onSetPpcGoals(n);}} style={inp({flex:1,minHeight:48,resize:'vertical',fontSize:16})}/>
+            </div>
+          </Card>
+        );})}
       </div>
     );
   }
@@ -1716,6 +1770,7 @@ export default function App(){
   var [activePeriod,setActivePeriod]=useState(CSEM);
   var [pendingPeriodId,setPendingPeriodId]=useState(null);
   var [activatedGPs,setActivatedGPs]=useState({});
+  var [ppcGoals,setPpcGoals]=useState(PPC_GOALS_DEFAULT.slice());
   function createPeriod(id,startDate){
     if(!id)return;
     setPeriods(function(prev){return prev.map(function(p){return p.status==='active'?Object.assign({},p,{status:'closed'}):p;}).concat([{id:id,label:labelPeriod(id),startDate:startDate||TODAY,status:'active'}]);});
@@ -1774,13 +1829,13 @@ export default function App(){
 
   var screens={
     home:     <Home user={cu} group={group} meetings={meetings} allPlans={allPlans} allAtt={allAtt} supMtgs={supMtgs} users={dynUsers} groups={dynGroups} go={setSc} goSup={goSup} sem={activePeriod} pendingPeriodId={pendingPeriodId} activatedGPs={activatedGPs} onActivateGP={activateGP}/>,
-    grupo:    <MiGrupo user={cu} group={group} meetings={meetings} plans={cuPlans} att={cuAtt} allAtt={allAtt} savePlan={savePlan} saveAtt={saveAtt} go={setSc} setFor={setAgFor} users={dynUsers} groups={dynGroups} onAgendar={function(m){setAgFor(m);setSc('agendar');}} onRegistrar={function(m){setAgFor(m);setSc('registrar');}}/>,
+    grupo:    <MiGrupo user={cu} group={group} meetings={meetings} plans={cuPlans} att={cuAtt} allAtt={allAtt} savePlan={savePlan} saveAtt={saveAtt} go={setSc} setFor={setAgFor} users={dynUsers} groups={dynGroups} onAgendar={function(m){setAgFor(m);setSc('agendar');}} onRegistrar={function(m){setAgFor(m);setSc('registrar');}} sem={activePeriod} ppcGoals={ppcGoals}/>,
     agendar:  <Agendar user={cu} group={group} meetings={meetings} onAdd={addM} onSyncProg={syncPPGProg} agFor={agFor} setFor={setAgFor} go={setSc} users={dynUsers} sem={activePeriod}/>,
     registrar:<Registrar user={cu} meetings={meetings} onUpd={updM}/>,
     progreso: <Progreso user={cu} group={group} meetings={meetings} users={dynUsers} sem={activePeriod}/>,
     sup:      <Supervision key={supTab} user={cu} meetings={meetings} allPlans={allPlans} allAtt={allAtt} supMeetings={supMtgs} onAddSup={addSM} onUpdSup={updSM} users={dynUsers} groups={dynGroups} initTab={supTab} sem={activePeriod}/>,
     servicios:<Servicios user={cu} allPlans={allPlans} users={dynUsers} groups={dynGroups} sem={activePeriod}/>,
-    admin:    <Admin user={cu} users={dynUsers} groups={dynGroups} onAddUser={addUser} onUpdUser={updUser} onAddGroup={addGroup} onUpdGroup={updGroup} periods={periods} activePeriod={activePeriod} pendingPeriodId={pendingPeriodId} activatedGPs={activatedGPs} onCreatePeriod={createPeriod} onClearPending={clearPending} allUsers={dynUsers}/>,
+    admin:    <Admin user={cu} users={dynUsers} groups={dynGroups} onAddUser={addUser} onUpdUser={updUser} onAddGroup={addGroup} onUpdGroup={updGroup} periods={periods} activePeriod={activePeriod} pendingPeriodId={pendingPeriodId} activatedGPs={activatedGPs} onCreatePeriod={createPeriod} onClearPending={clearPending} allUsers={dynUsers} ppcGoals={ppcGoals} onSetPpcGoals={setPpcGoals}/>,
     misup:    <MiSupervision user={cu} supMeetings={supMtgs} users={dynUsers} sem={activePeriod}/>,
   };
 
