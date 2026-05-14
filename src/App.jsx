@@ -31,6 +31,39 @@ const SECCIONES_PPP=[
   {key:'perfil', title:'V. Perfil y Carácter',items:['Hombre / Mujer moral','Testigo de Cristo – Evangelización','Buen miembro de familia','Trabajo y sociedad','Cuidado personal','Carácter']},
 ];
 
+// ── Supervisión al RP — Parte A: evaluación del RP ───────────────────────────
+const SECCIONES_SUPRP_A=[
+  {key:'conocHab',title:'I.  Conocimientos y habilidades',items:['¿Conoces tu Plan Pastoral Personal?','¿Conoces el Plan Pastoral Comunitario?','¿Conoces el Plan Pastoral de tu Sector?','¿Conoces cómo funciona la Cadena Pastoral y la Supervisión de tu Sector?','¿Puedes explicar el Núcleo Común Irreductible de la EDE?']},
+  {key:'conocGP', title:'II.  Conocimiento de tu GP',items:['¿Conoces bien a los hermanos/as de tu GP (situación personal, familiar y espiritual)?','¿Oras por cada uno de ellos/as y por sus necesidades específicas?','¿Los hermanos/as de tu GP saben que pueden contar contigo?','¿Haces tu labor pastoral con alegría, amor y entrega?','¿Llevas una bitácora o registro de los eventos de tu grupo?']},
+  {key:'apertura',title:'III.  Apertura con tu Supervisor/a',items:['¿Vives en la luz con tu Supervisor/a (le confías dificultades en el servicio)?','¿Comunicas oportunamente las situaciones especiales de tus hermanos/as?','¿Evitas justificar las fallas de tus ovejas ante tu Supervisor/a?','¿Eres abierto/a a recibir orientación y corrección de tu Supervisor/a?','¿Pones en práctica los compromisos adquiridos en la Supervisión?']},
+  {key:'manejoPlanes',title:'IV.  Manejo de Planes Pastorales (PPG y PPP)',items:['¿Elaboraste y compartiste adecuadamente el PPG con los hermanos/as de tu Grupo?','¿Elaboraste los PPP de manera individual para cada hermano/a y se lo presentaste a cada uno/a?','¿Haces seguimiento activo al PPG y los PPP durante el semestre?']},
+];
+// ── Supervisión al RP — Parte B: reporte del GP ───────────────────────────────
+const SECCIONES_SUPRP_B=[
+  {key:'identidad',title:'I.  Identidad EDE y Emmanuel',items:['¿Los hermanos/as de tu GP conocen la profecía del Baluarte?','¿Conocen nuestra profecía fundacional?','¿Conocen el Plan Pastoral Comunitario (PPC)?']},
+  {key:'planGP',   title:'II.  Plan Pastoral del Grupo',items:['¿Tu grupo tiene un Plan Pastoral (PPG)?','¿Revisan el avance del Plan Pastoral entre todos?','¿Poseen una programación semestral de reuniones del GP?','¿Cada miembro del grupo posee un Plan Pastoral Personal (PPP)?','¿Cada hermano/a conoce su PPP?']},
+  {key:'sincoEses',title:'III.  Las 5 S\'s del Grupo',es5S:true,items:[
+    {id:'semanalidad',  label:'Semanalidad',   desc:'Asistencia y puntualidad a las reuniones del GP y comunitarias'},
+    {id:'sinceridad',   label:'Sinceridad',    desc:'Nivel de participación, apertura y profundidad en el compartir'},
+    {id:'seriedad',     label:'Seriedad',      desc:'Capacidad de tomar las cosas con seriedad sin menoscabar la naturalidad'},
+    {id:'sigilo',       label:'Sigilo',        desc:'Lealtad mutua: lo que se comparte en el GP no se comenta fuera de él'},
+    {id:'subordinacion',label:'Subordinación', desc:'Respuesta de los miembros a las orientaciones y dirección del RP'},
+  ]},
+  {key:'relaciones',title:'IV.  Relaciones entre los miembros del Grupo',items:['¿Las relaciones entre los hermanos/as del grupo son cordiales y fraternas?','¿Los hermanos/as del GP se animan unos a otros?','¿Tienen actividades que fomentan la fraternidad dentro del grupo?','¿Hay sigilo y confidencialidad entre los hermanos/as de tu grupo?','¿Los hermanos/as del GP comparten lo que está pasando en su vida?']},
+  {key:'vidaCristo',title:'V.  Vida en Cristo del Grupo',items:['¿Los hermanos/as de tu GP reconocen a nuestro Señor Jesús como su Señor y Salvador?','¿En tu grupo los hermanos/as interceden unos por otros?','¿Se motivan unos a otros en la Fe?','¿Los hermanos/as de tu GP conocen la Palabra de Dios, la estudian y la usan en sus vidas?','¿En situaciones de crisis hacen batalla espiritual?']},
+  {key:'fidelidad',title:'VI.  Fidelidad del Grupo',items:['¿Asisten puntualmente a las reuniones del grupo?','¿Asisten puntualmente a las reuniones comunitarias?','¿Se cumplen los compromisos adquiridos como grupo?']},
+  {key:'formacion',title:'VII.  Formación del Grupo',items:['¿Todos los miembros de tu Grupo asisten fielmente a los cursos comunitarios?','¿Das seguimiento en tu Grupo a los cursos comunitarios?']},
+  {key:'finanzas', title:'VIII.  Finanzas',items:['¿Son los hermanos/as de tu grupo fieles y honestos con la contribución económica?','¿Posee cada miembro de tu grupo un presupuesto personal?','¿Son fieles a ese presupuesto?']},
+];
+// ── Supervisión al GP — Visita cualitativa ────────────────────────────────────
+const SECCIONES_SUPVISITA=[
+  {key:'distribucion',title:'1.  Distribución del tiempo de la reunión',items:['Hora de inicio de la reunión','Tiempo de Alabanza y Oración — manera de dirigirla, espiritualidad de la guía','Tiempo de compartir','Seguimiento de enseñanza y/o cursos comunitarios','Otros momentos de la reunión']},
+  {key:'manejoRP',    title:'2.  Manejo del grupo por el RP',items:['¿Cómo dirigió la oración inicial?','¿Tomó en cuenta la guía del Señor?','¿Cómo se relaciona con los miembros del grupo?','¿Hay aceptación del RP por parte de los miembros del grupo?','¿Cómo se percibe el manejo y conducción del grupo?','¿Es clara la enseñanza que maneja (seguimiento de cursos u otros)?','¿Tiene manejo de la Palabra de Dios?']},
+  {key:'percepcion',  title:'3.  Percepción del grupo',items:['¿La oración es en voz alta y con manifestaciones carismáticas? ¿Hay apertura a los dones del Espíritu Santo?','¿Se nota respeto y subordinación hacia el RP?','¿El comportamiento individual es abierto, buscando estar a la luz?','¿Se nota la relación de amistad y hermandad entre los miembros del grupo?','¿Hay participación activa de todos los miembros del grupo?']},
+];
+const PSUP_COL={'1':R,'2':W,'3':'#718096','4':G,'5':'#1A6FA8'};
+const PSUP_LBL={'':'Seleccionar','1':'1 — Pésimo','2':'2 — Malo','3':'3 — Regular','4':'4 — Bueno','5':'5 — Excelente'};
+
 const ROLE_OPTIONS=[
   {id:'coordinador_mayor', label:'Coordinador Mayor',     roles:['coordinador_mayor','supervisor_cds']},
   {id:'coordinador_sector',label:'Coordinador de Sector', roles:['coordinador_sector']},
@@ -449,6 +482,93 @@ function printReporte(sector,rps,groups,meetings,allPlans,allAtt){
   });
   H+='<p class="foot">Koinonía · Comunidad Emmanuel · Cali · '+CSEM+'</p></body></html>';
   dlHTML(H,'Reporte_'+sector.replace(/\s+/g,'_')+'_'+CSEM);
+}
+
+function initSupSec(items){return items.map(function(it){return{item:typeof it==='string'?it:it.label,puntaje:'',comentario:''};});}
+function initSupRP(miembros){
+  var secA={};
+  SECCIONES_SUPRP_A.forEach(function(s){secA[s.key]=initSupSec(s.items);});
+  var secB={};
+  SECCIONES_SUPRP_B.forEach(function(s){
+    if(s.es5S){secB[s.key]={semanalidad:{puntaje:'',comentario:''},sinceridad:{puntaje:'',comentario:''},seriedad:{puntaje:'',comentario:''},sigilo:{puntaje:'',comentario:''},subordinacion:{puntaje:'',comentario:''}};}
+    else{secB[s.key]=initSupSec(s.items);}
+  });
+  var integ={};
+  (miembros||[]).forEach(function(m){integ[m.id]={anotaciones:''};});
+  return{pregPersonales:{oracion:'',salud:'',retos:'',alianza:''},secA:secA,sintesis:{areasCrec:'',pautas:'',compromisos:''},secB:secB,integ:integ,acciones:{corregir:'',prevenir:'',fomentar:'',potenciar:'',obsRS:''},reuniones:[],sem:CSEM};
+}
+function initSupGP(){
+  var secs={};
+  SECCIONES_SUPVISITA.forEach(function(s){secs[s.key]=s.items.map(function(it){return{aspecto:it,observacion:''};});});
+  return{secciones:secs,obsFinales:'',reuniones:[],sem:CSEM};
+}
+function calcSupAvg(data){
+  if(!data||!data.secA)return 0;var total=0,count=0;
+  var allSecs=SECCIONES_SUPRP_A.concat(SECCIONES_SUPRP_B);
+  allSecs.forEach(function(sec){
+    var src=data.secA[sec.key]!==undefined?data.secA:data.secB;
+    if(!src)return;
+    if(sec.es5S){var s5=src[sec.key]||{};sec.items.forEach(function(it){var v=s5[it.id];if(v&&v.puntaje){total+=parseInt(v.puntaje);count++;}});}
+    else if(!sec.esFidelidad){(src[sec.key]||[]).forEach(function(r){if(r.puntaje){total+=parseInt(r.puntaje);count++;}});}
+  });
+  return count>0?Math.round(total/count*10)/10:0;
+}
+
+function printSupervision(rpNombre,groupNombre,supRP,supGP,miembros,sem){
+  var CSS='body{font-family:Arial,sans-serif;font-size:11px;color:#2D3748;margin:20px}h1{color:#0A3D62;font-size:16px;margin:0 0 4px}h2{color:#fff;font-size:13px;background:#0A3D62;padding:6px 10px;margin:14px 0 6px}h2.b{background:#1A5276}h3{color:#0A3D62;font-size:11px;margin:9px 0 3px;font-weight:bold}table{width:100%;border-collapse:collapse;font-size:10px;margin-bottom:8px}th{background:#D6EAF8;color:#0A3D62;padding:4px 5px;text-align:left}td{padding:4px 5px;border-bottom:1px solid #E2E8F0}.pill{padding:1px 6px;border-radius:10px;font-weight:bold;font-size:10px}.blk{background:#EDF2F7;border-left:4px solid #0A3D62;padding:7px 10px;border-radius:0 6px 6px 0;margin:5px 0;font-size:10px}.foot{margin-top:18px;text-align:center;border-top:1px solid #E2E8F0;padding-top:8px;color:#718096;font-size:9px}.pp{background:#EDF7FF;border-left:3px solid #AED6F1;padding:5px 10px;margin:3px 0;font-size:10px}';
+  var PCOL2={'1':'#9B2C2C','2':'#B7791F','3':'#718096','4':'#276749','5':'#1A6FA8'};
+  var PLBL2={'1':'Pésimo','2':'Malo','3':'Regular','4':'Bueno','5':'Excelente'};
+  function pill(pv){if(!pv)return'<span style="color:#718096">—</span>';return'<span class="pill" style="background:'+PCOL2[pv]+'22;color:'+PCOL2[pv]+'">'+pv+' — '+PLBL2[pv]+'</span>';}
+  function tblSec(rows){var h='<table><thead><tr><th>Pregunta</th><th style="width:22%">Puntaje</th><th style="width:25%">Comentario</th></tr></thead><tbody>';(rows||[]).forEach(function(r){h+='<tr><td>'+r.item+'</td><td>'+pill(r.puntaje)+'</td><td>'+(r.comentario||'—')+'</td></tr>';});return h+'</tbody></table>';}
+  var H='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Supervisión '+rpNombre+'</title><style>'+CSS+'</style></head><body>';
+  H+='<h1>📋 Supervisión Semestral — '+rpNombre+'</h1>';
+  H+='<p style="font-size:11px"><strong>Grupo:</strong> '+groupNombre+' &emsp;|&emsp;<strong>Semestre:</strong> '+(sem||CSEM)+'&emsp;|&emsp;<strong>Generado:</strong> '+new Date().toLocaleDateString('es-CO')+'</p>';
+  // ── SUPERVISIÓN AL RP ─────────────────────────────────────────────────────
+  H+='<h2>SUPERVISIÓN AL RESPONSABLE PASTORAL</h2>';
+  if(supRP){
+    // Parte A
+    H+='<h2 class="b">PARTE A — Conocimiento, habilidades y organización</h2>';
+    var pp=supRP.pregPersonales||{};
+    if(pp.oracion||pp.salud||pp.retos||pp.alianza){
+      H+='<h3>Preguntas personales</h3>';
+      [['¿Cómo está tu vida de oración y tu relación con el Señor?',pp.oracion],['¿Cómo está tu salud?',pp.salud],['¿Qué retos estás enfrentando en tu vida?',pp.retos],['¿Estás viviendo plenamente tu Alianza?',pp.alianza]].forEach(function(q){if(q[1])H+='<div class="pp"><strong>'+q[0]+'</strong><br>'+q[1]+'</div>';});
+    }
+    var sA=supRP.secA||{};
+    SECCIONES_SUPRP_A.forEach(function(sec){H+='<h3>'+sec.title+'</h3>'+tblSec(sA[sec.key]);});
+    var st=supRP.sintesis||{};
+    if(st.areasCrec)H+='<div class="blk"><strong>Áreas de crecimiento:</strong> '+st.areasCrec+'</div>';
+    if(st.pautas)H+='<div class="blk"><strong>Pautas del Supervisor/a:</strong> '+st.pautas+'</div>';
+    if(st.compromisos)H+='<div class="blk"><strong>Compromisos del RP:</strong> '+st.compromisos+'</div>';
+    // Parte B
+    H+='<h2 class="b">PARTE B — Reporte del Grupo Pastoral</h2>';
+    var sB=supRP.secB||{};
+    SECCIONES_SUPRP_B.forEach(function(sec){
+      H+='<h3>'+sec.title+'</h3>';
+      if(sec.es5S){var s5=sB[sec.key]||{};H+='<table><thead><tr><th style="width:16%">S</th><th>Descripción</th><th style="width:18%">Puntaje</th><th style="width:22%">Comentario</th></tr></thead><tbody>';sec.items.forEach(function(it){var sv=s5[it.id]||{};H+='<tr><td><strong>'+it.label+'</strong></td><td style="color:#718096;font-size:9px">'+it.desc+'</td><td>'+pill(sv.puntaje)+'</td><td>'+(sv.comentario||'—')+'</td></tr>';});H+='</tbody></table>';}
+      else if(sec.esFidelidad){H+='<table><thead><tr><th>Pregunta</th><th style="width:14%">Sí / No</th><th style="width:30%">Comentario</th></tr></thead><tbody>';(sB[sec.key]||[]).forEach(function(r){H+='<tr><td>'+r.item+'</td><td style="text-align:center;font-weight:bold">'+(r.respuesta||'—')+'</td><td>'+(r.comentario||'—')+'</td></tr>';});H+='</tbody></table>';}
+      else{H+=tblSec(sB[sec.key]);}
+    });
+    var ig=supRP.integ||{};var igKeys=Object.keys(ig);
+    if(igKeys.length){H+='<h3>Cuadro de Integrantes</h3><table><thead><tr><th style="width:30%">Hermano/a</th><th>Anotaciones generales</th></tr></thead><tbody>';(miembros||[]).filter(function(m){return !m.rpOverride;}).forEach(function(m){var iv=ig[m.id]||{};H+='<tr><td><strong>'+m.nombre+'</strong></td><td>'+(iv.anotaciones||'—')+'</td></tr>';});H+='</tbody></table>';}
+    var ac=supRP.acciones||{};H+='<h3>Acciones</h3><table><tbody>';
+    [['🔴 Corregir',ac.corregir],['🟡 Prevenir',ac.prevenir],['🟢 Fomentar',ac.fomentar],['🔵 Potenciar',ac.potenciar],['📝 Obs. RS',ac.obsRS]].forEach(function(r){if(r[1])H+='<tr><td style="width:22%;font-weight:bold;color:#0A3D62">'+r[0]+'</td><td>'+r[1]+'</td></tr>';});
+    H+='</tbody></table>';
+    if(supRP.reuniones&&supRP.reuniones.length){H+='<h3>Reuniones Sup. RP</h3><table><thead><tr><th style="width:22%">Fecha</th><th>Notas</th></tr></thead><tbody>';supRP.reuniones.forEach(function(r){H+='<tr><td>'+fmt(r.fecha)+'</td><td>'+(r.notas||'—')+'</td></tr>';});H+='</tbody></table>';}
+  }
+  // ── VISITA AL GP ─────────────────────────────────────────────────────────
+  if(supGP){
+    H+='<h2>VISITA AL GRUPO PASTORAL</h2>';
+    var sv=supGP.secciones||{};
+    SECCIONES_SUPVISITA.forEach(function(sec){
+      H+='<h3>'+sec.title+'</h3><table><thead><tr><th style="width:40%">Aspecto observado</th><th>Observaciones</th></tr></thead><tbody>';
+      (sv[sec.key]||[]).forEach(function(r){H+='<tr><td>'+r.aspecto+'</td><td>'+(r.observacion||'—')+'</td></tr>';});
+      H+='</tbody></table>';
+    });
+    if(supGP.obsFinales)H+='<div class="blk"><strong>Observaciones finales:</strong> '+supGP.obsFinales+'</div>';
+    if(supGP.reuniones&&supGP.reuniones.length){H+='<h3>Visitas realizadas</h3><table><thead><tr><th style="width:22%">Fecha</th><th>Notas</th></tr></thead><tbody>';supGP.reuniones.forEach(function(r){H+='<tr><td>'+fmt(r.fecha)+'</td><td>'+(r.notas||'—')+'</td></tr>';});H+='</tbody></table>';}
+  }
+  H+='<p class="foot">Koinonía · Comunidad Emmanuel · Cali · '+(sem||CSEM)+'</p></body></html>';
+  dlHTML(H,'Sup_'+rpNombre.replace(/\s+/g,'_')+'_'+(sem||CSEM));
 }
 
 // ─── UI Primitivos ───────────────────────────────────────────────────────────
@@ -1099,7 +1219,7 @@ function Agendar(p){
         <div style={{marginBottom:14}}><div style={{fontSize:17,color:MU,fontWeight:600,marginBottom:4}}>Notas previas</div><textarea value={notas} onChange={function(e){setNotas(e.target.value);}} style={inp({minHeight:64,resize:'vertical'})}/></div>
         <Btn onClick={save} style={{width:'100%',padding:12}}>Agendar 📅</Btn>
       </Card>
-      {pend.length>0&&(<div><p style={{fontSize:17,fontWeight:700,color:P,margin:'0 0 8px'}}>PROGRAMADAS</p>{pend.map(function(m){return(<Card key={m.id} style={{marginBottom:8}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}><div><p style={{margin:0,fontWeight:700,fontSize:18}}>{m.miembroNombre}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>{fmt(m.fecha)} · {m.hora}</p></div><Btn small variant='success' onClick={function(){p.go('registrar');}}>Registrar ✅</Btn></div></Card>);})}</div>)}
+      {pend.length>0&&(<div><p style={{fontSize:17,fontWeight:700,color:P,margin:'0 0 8px'}}>PROGRAMADAS</p>{pend.map(function(m){return(<Card key={m.id} style={{marginBottom:8}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}><div><p style={{margin:0,fontWeight:700,fontSize:18}}>{m.miembroNombre}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>{fmt(m.fecha)} · {m.hora}</p></div><div style={{display:'flex',alignItems:'center',gap:6}}><span style={{background:'#EBF4FF',color:P,fontSize:15,padding:'3px 9px',borderRadius:20,fontWeight:600,whiteSpace:'nowrap'}}>📅 Agendada</span><Btn small variant='primary' onClick={function(){p.go('registrar');}}>Registrar</Btn></div></div></Card>);})}</div>)}
     </div>
   );
 }
@@ -1120,7 +1240,7 @@ function Registrar(p){
       <p style={{color:MU,fontSize:17,margin:'0 0 16px'}}>Marca como realizada una reunión de Pastoreo Personal</p>
       {ok&&<div style={{background:'#F0FFF4',border:'1.5px solid #68D391',borderRadius:10,padding:12,marginBottom:14,textAlign:'center',fontWeight:700,color:G}}>🙏 ¡Reunión registrada con gratitud!</div>}
       {pend.length===0&&<Card style={{textAlign:'center',padding:28,color:MU}}><div style={{fontSize:39}}>✨</div><p style={{fontSize:18,margin:'8px 0 0'}}>No tienes reuniones pendientes.</p></Card>}
-      {pend.map(function(m){return(<Card key={m.id} style={{marginBottom:10,border:selId===m.id?'2px solid '+P:undefined}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:selId===m.id?12:0}}><div><p style={{margin:0,fontWeight:700,fontSize:18}}>{m.miembroNombre}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>Agendada: {fmt(m.fecha)} · {m.hora}</p></div><Btn small variant={selId===m.id?'outline':'primary'} onClick={function(){setSelId(selId===m.id?null:m.id);}}>{selId===m.id?'Cancelar':'Registrar'}</Btn></div>{selId===m.id&&(<div><div style={{marginBottom:10}}><div style={{fontSize:17,color:MU,fontWeight:600,marginBottom:4}}>Fecha real</div><input type='date' value={fechaR} onChange={function(e){setFechaR(e.target.value);}} style={inp()}/></div><div style={{marginBottom:10}}><div style={{fontSize:17,color:MU,fontWeight:600,marginBottom:4}}>Nota de gratitud (opcional)</div><textarea value={nota} onChange={function(e){setNota(e.target.value);}} style={inp({minHeight:72,resize:'vertical'})}/></div><Btn variant='success' onClick={reg} style={{width:'100%'}}>✅ Confirmar como Realizada</Btn></div>)}</Card>);})}
+      {pend.map(function(m){return(<Card key={m.id} style={{marginBottom:10,border:selId===m.id?'2px solid '+P:undefined}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:selId===m.id?12:0}}><div><p style={{margin:0,fontWeight:700,fontSize:18}}>{m.miembroNombre}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>Agendada: {fmt(m.fecha)} · {m.hora}</p></div><div style={{display:'flex',alignItems:'center',gap:6}}>{selId===m.id?<Btn small variant='outline' onClick={function(){setSelId(null);}}> Cancelar</Btn>:<><span style={{background:'#EBF4FF',color:P,fontSize:15,padding:'3px 9px',borderRadius:20,fontWeight:600,whiteSpace:'nowrap'}}>📅 Agendada</span><Btn small variant='primary' onClick={function(){setSelId(m.id);}}>Registrar</Btn></>}</div></div>{selId===m.id&&(<div><div style={{marginBottom:10}}><div style={{fontSize:17,color:MU,fontWeight:600,marginBottom:4}}>Fecha real</div><input type='date' value={fechaR} onChange={function(e){setFechaR(e.target.value);}} style={inp()}/></div><div style={{marginBottom:10}}><div style={{fontSize:17,color:MU,fontWeight:600,marginBottom:4}}>Nota de gratitud (opcional)</div><textarea value={nota} onChange={function(e){setNota(e.target.value);}} style={inp({minHeight:72,resize:'vertical'})}/></div><Btn variant='success' onClick={reg} style={{width:'100%'}}>✅ Confirmar como Realizada</Btn></div>)}</Card>);})}
       {recent.length>0&&(<div><p style={{fontSize:17,fontWeight:700,color:P,margin:'16px 0 8px'}}>ÚLTIMAS REALIZADAS</p>{recent.map(function(m){return(<Card key={m.id} style={{marginBottom:8,opacity:0.85}}><div style={{display:'flex',justifyContent:'space-between'}}><div><p style={{margin:0,fontWeight:700,fontSize:18}}>{m.miembroNombre}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>{fmt(m.fechaReal)}</p></div><span style={{background:G+'22',color:G,fontSize:16,padding:'2px 8px',borderRadius:20,fontWeight:600}}>✓</span></div>{m.notaFinal&&<p style={{margin:'6px 0 0',fontSize:17,color:MU,fontStyle:'italic'}}>"{m.notaFinal}"</p>}</Card>);})}</div>)}
     </div>
   );
@@ -1436,7 +1556,7 @@ function Cadena(p){
         </Card>
       )}
       {myMtgs.length===0&&(<Card style={{textAlign:'center',padding:28,color:MU}}><div style={{fontSize:39}}>🔄</div><p style={{fontSize:18,margin:'8px 0 4px'}}>No hay reuniones de supervisión registradas aún.</p></Card>)}
-      {upcoming.length>0&&(<div><p style={{fontSize:17,fontWeight:700,color:P,margin:'0 0 8px'}}>PRÓXIMAS ({upcoming.length})</p>{upcoming.map(function(m){var t=getTipo(m.tipo),marked=selId===m.id;return(<Card key={m.id} style={{marginBottom:10,border:marked?'2px solid '+P:undefined}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:marked?10:0}}><div><div style={{display:'flex',alignItems:'center',gap:6,marginBottom:3}}><span style={{fontSize:21}}>{t.icon}</span><span style={{background:t.color+'22',color:t.color,fontSize:16,padding:'2px 8px',borderRadius:20,fontWeight:700}}>{t.label}</span></div><p style={{margin:0,fontSize:18,fontWeight:600,color:'#071F33'}}>{partLabel(m)}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>{fmt(m.fecha)} · {m.hora}</p></div><Btn small variant={marked?'outline':'success'} onClick={function(){setSelId(marked?null:m.id);setRNotas('');setRPautas('');}}>{marked?'Cancelar':'✅ Realizada'}</Btn></div>{marked&&(<div><div style={{marginBottom:8}}><div style={{fontSize:17,color:MU,fontWeight:600,marginBottom:4}}>Nota / resumen</div><textarea value={rNotas} onChange={function(e){setRNotas(e.target.value);}} style={inp({minHeight:60,resize:'vertical'})} placeholder='¿Cómo fue la reunión?'/></div>{(m.tipo==='retro1'||m.tipo==='retro2')&&(<div style={{marginBottom:10}}><div style={{fontSize:17,color:MU,fontWeight:600,marginBottom:4}}>Pautas pastorales</div><textarea value={rPautas} onChange={function(e){setRPautas(e.target.value);}} style={inp({minHeight:80,resize:'vertical'})} placeholder='Pautas para fortalecer el PPG y el PPP...'/></div>)}<Btn variant='success' onClick={function(){confirmar(m);}} style={{width:'100%'}}>✅ Confirmar como Realizada</Btn></div>)}</Card>);})}</div>)}
+      {upcoming.length>0&&(<div><p style={{fontSize:17,fontWeight:700,color:P,margin:'0 0 8px'}}>PRÓXIMAS ({upcoming.length})</p>{upcoming.map(function(m){var t=getTipo(m.tipo),marked=selId===m.id;return(<Card key={m.id} style={{marginBottom:10,border:marked?'2px solid '+P:undefined}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:marked?10:0}}><div><div style={{display:'flex',alignItems:'center',gap:6,marginBottom:3}}><span style={{fontSize:21}}>{t.icon}</span><span style={{background:t.color+'22',color:t.color,fontSize:16,padding:'2px 8px',borderRadius:20,fontWeight:700}}>{t.label}</span></div><p style={{margin:0,fontSize:18,fontWeight:600,color:'#071F33'}}>{partLabel(m)}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>{fmt(m.fecha)} · {m.hora}</p></div><div style={{display:'flex',alignItems:'center',gap:6}}>{marked?<Btn small variant='outline' onClick={function(){setSelId(null);setRNotas('');setRPautas('');}}>Cancelar</Btn>:<><span style={{background:'#EBF4FF',color:P,fontSize:15,padding:'3px 9px',borderRadius:20,fontWeight:600,whiteSpace:'nowrap'}}>📅 Agendada</span><Btn small variant='primary' onClick={function(){setSelId(m.id);setRNotas('');setRPautas('');}}>Registrar</Btn></>}</div></div>{marked&&(<div><div style={{marginBottom:8}}><div style={{fontSize:17,color:MU,fontWeight:600,marginBottom:4}}>Nota / resumen</div><textarea value={rNotas} onChange={function(e){setRNotas(e.target.value);}} style={inp({minHeight:60,resize:'vertical'})} placeholder='¿Cómo fue la reunión?'/></div>{(m.tipo==='retro1'||m.tipo==='retro2')&&(<div style={{marginBottom:10}}><div style={{fontSize:17,color:MU,fontWeight:600,marginBottom:4}}>Pautas pastorales</div><textarea value={rPautas} onChange={function(e){setRPautas(e.target.value);}} style={inp({minHeight:80,resize:'vertical'})} placeholder='Pautas para fortalecer el PPG y el PPP...'/></div>)}<Btn variant='success' onClick={function(){confirmar(m);}} style={{width:'100%'}}>✅ Confirmar como Realizada</Btn></div>)}</Card>);})}</div>)}
       {past.length>0&&(<div style={{marginTop:16}}><p style={{fontSize:17,fontWeight:700,color:P,margin:'0 0 8px'}}>REALIZADAS ({past.length})</p>{past.map(function(m){var t=getTipo(m.tipo);return(<Card key={m.id} style={{marginBottom:8,opacity:0.9}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}><div><div style={{display:'flex',alignItems:'center',gap:6,marginBottom:3}}><span style={{fontSize:18}}>{t.icon}</span><span style={{background:t.color+'22',color:t.color,fontSize:16,padding:'2px 8px',borderRadius:20,fontWeight:700}}>{t.label}</span></div><p style={{margin:0,fontSize:17,fontWeight:600}}>{partLabel(m)}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>{fmt(m.fechaReal||m.fecha)}</p>{m.notasReunion&&<p style={{margin:'4px 0 0',fontSize:16,color:MU,fontStyle:'italic'}}>"{m.notasReunion}"</p>}{m.pautas&&<div style={{margin:'6px 0 0',padding:'6px 8px',background:P+'10',borderRadius:6,fontSize:16}}><strong style={{color:P}}>Pautas: </strong>{m.pautas}</div>}</div><span style={{background:G+'22',color:G,fontSize:16,padding:'2px 8px',borderRadius:20,fontWeight:600,whiteSpace:'nowrap'}}>✓</span></div></Card>);})}</div>)}
     </div>
   );
@@ -1466,6 +1586,263 @@ function Servicios(p){
   );
 }
 
+// ─── FORMULARIOS DE SUPERVISIÓN ──────────────────────────────────────────────
+// SupGPForm = Visita cualitativa del Supervisor al GP (Segmento 2)
+function SupGPForm(p){
+  var readOnly=p.readOnly||false;
+  var sem=p.sem||CSEM;
+  function mk(){
+    var b=initSupGP();
+    var sv=p.data;
+    if(!sv)return b;
+    var m=Object.assign({},b);
+    m.secciones=Object.assign({},b.secciones);
+    SECCIONES_SUPVISITA.forEach(function(s){if(sv.secciones&&sv.secciones[s.key]!==undefined)m.secciones[s.key]=sv.secciones[s.key];});
+    m.obsFinales=sv.obsFinales||'';
+    m.reuniones=sv.reuniones?sv.reuniones.slice():[];
+    return m;
+  }
+  var [d,setD]=useState(mk());
+  var [ok,setOk]=useState(false);
+  function updObs(sk,i,val){setD(function(prev){var sc=Object.assign({},prev.secciones);var rw=sc[sk].slice();rw[i]=Object.assign({},rw[i],{observacion:val});sc[sk]=rw;return Object.assign({},prev,{secciones:sc});});}
+  function updFinal(val){setD(function(prev){return Object.assign({},prev,{obsFinales:val});});}
+  function addReun(){setD(function(prev){return Object.assign({},prev,{reuniones:(prev.reuniones||[]).concat([{fecha:TODAY,notas:''}])});});}
+  function updReun(i,field,val){setD(function(prev){var rs=prev.reuniones.slice();rs[i]=Object.assign({},rs[i],{[field]:val});return Object.assign({},prev,{reuniones:rs});});}
+  function save(){if(p.onSave)p.onSave(d);setOk(true);setTimeout(function(){setOk(false);},2000);}
+  var sH={fontSize:17,fontWeight:700,color:P,margin:'14px 0 6px',paddingBottom:3,borderBottom:'1px solid '+P+'33'};
+  return (
+    <div>
+      {ok&&<div style={{background:'#F0FFF4',border:'1.5px solid #68D391',borderRadius:10,padding:10,marginBottom:10,textAlign:'center',fontWeight:700,color:G}}>✅ Guardado</div>}
+      <div style={{background:'#154E78',color:'#fff',padding:'8px 14px',borderRadius:8,fontSize:17,fontWeight:700,marginBottom:12}}>👁 Visita al Grupo Pastoral</div>
+      <p style={{fontSize:15,color:MU,marginTop:0,marginBottom:12,fontStyle:'italic'}}>Observaciones del Supervisor/a durante una reunión del GP.</p>
+      {SECCIONES_SUPVISITA.map(function(sec){
+        var rows=d.secciones[sec.key]||[];
+        return (
+          <div key={sec.key}>
+            <p style={sH}>{sec.title}</p>
+            {rows.map(function(row,i){return(
+              <Card key={i} style={{marginBottom:6}}>
+                <div style={{fontSize:16,color:MU,fontWeight:600,marginBottom:4,lineHeight:1.3}}>{row.aspecto}</div>
+                {readOnly?(<div style={{fontSize:15,padding:'5px 8px',background:BG,borderRadius:7,minHeight:28}}>{row.observacion||'—'}</div>):(<textarea value={row.observacion||''} onChange={function(e){updObs(sec.key,i,e.target.value);}} style={inp({minHeight:52,resize:'vertical',fontSize:15})} placeholder='Observaciones...'/>)}
+              </Card>
+            );})}
+          </div>
+        );
+      })}
+      <p style={sH}>📝 Observaciones finales de la visita</p>
+      {readOnly?(<div style={{fontSize:15,padding:'5px 8px',background:BG,borderRadius:7,minHeight:60}}>{d.obsFinales||'—'}</div>):(<textarea value={d.obsFinales||''} onChange={function(e){updFinal(e.target.value);}} style={inp({minHeight:80,resize:'vertical',fontSize:15})} placeholder='Síntesis general de la visita...'/>)}
+      <p style={sH}>📅 Visitas realizadas</p>
+      {!readOnly&&<Btn small variant='outline' onClick={addReun} style={{marginBottom:8}}>+ Registrar visita</Btn>}
+      {(!d.reuniones||!d.reuniones.length)&&<p style={{fontSize:15,color:MU,fontStyle:'italic'}}>Sin visitas registradas aún.</p>}
+      {(d.reuniones||[]).map(function(r,i){return(
+        <Card key={i} style={{marginBottom:6}}>
+          <div style={{display:'grid',gridTemplateColumns:'auto 1fr',gap:8}}>
+            <div><div style={{fontSize:14,color:MU,fontWeight:600,marginBottom:2}}>Fecha</div>{readOnly?<span style={{fontSize:15}}>{fmt(r.fecha)||'—'}</span>:<input type='date' value={r.fecha||''} onChange={function(e){updReun(i,'fecha',e.target.value);}} style={inp({fontSize:15,padding:'5px 8px'})}/>}</div>
+            <div><div style={{fontSize:14,color:MU,fontWeight:600,marginBottom:2}}>Notas</div>{readOnly?<span style={{fontSize:15}}>{r.notas||'—'}</span>:<input value={r.notas||''} onChange={function(e){updReun(i,'notas',e.target.value);}} style={inp({fontSize:15,padding:'5px 8px'})} placeholder='Notas de la visita...'/>}</div>
+          </div>
+        </Card>
+      );})}
+      {!readOnly&&<div style={{marginTop:14}}><Btn variant='success' onClick={save} style={{width:'100%',padding:12}}>💾 Guardar Visita al GP</Btn></div>}
+    </div>
+  );
+}
+
+// SupRPForm = Supervisión al RP: Parte A (evaluación) + Parte B (reporte GP)
+function SupRPForm(p){
+  var readOnly=p.readOnly||false;
+  var miembros=(p.miembros||[]).filter(function(m){return !m.rpOverride;});
+  var sem=p.sem||CSEM;
+  function mk(){
+    var b=initSupRP(miembros);
+    var sv=p.data;
+    if(!sv)return b;
+    var m=Object.assign({},b);
+    m.pregPersonales=Object.assign({},b.pregPersonales,sv.pregPersonales||{});
+    m.secA=Object.assign({},b.secA);
+    SECCIONES_SUPRP_A.forEach(function(s){if(sv.secA&&sv.secA[s.key]!==undefined)m.secA[s.key]=sv.secA[s.key];});
+    m.sintesis=Object.assign({},b.sintesis,sv.sintesis||{});
+    m.secB=Object.assign({},b.secB);
+    SECCIONES_SUPRP_B.forEach(function(s){if(sv.secB&&sv.secB[s.key]!==undefined)m.secB[s.key]=sv.secB[s.key];});
+    m.integ=Object.assign({},b.integ,sv.integ||{});
+    m.acciones=Object.assign({},b.acciones,sv.acciones||{});
+    m.reuniones=sv.reuniones?sv.reuniones.slice():[];
+    return m;
+  }
+  var [d,setD]=useState(mk());
+  var [ok,setOk]=useState(false);
+  var dRef=React.useRef(d);
+  dRef.current=d;
+  function updPP(field,val){setD(function(prev){return Object.assign({},prev,{pregPersonales:Object.assign({},prev.pregPersonales,{[field]:val})});});}
+  function updRowA(sk,i,field,val){setD(function(prev){var sc=Object.assign({},prev.secA);var rw=sc[sk].slice();rw[i]=Object.assign({},rw[i],{[field]:val});sc[sk]=rw;return Object.assign({},prev,{secA:sc});});}
+  function updSintesis(field,val){setD(function(prev){return Object.assign({},prev,{sintesis:Object.assign({},prev.sintesis,{[field]:val})});});}
+  function updRowB(sk,i,field,val){setD(function(prev){var sc=Object.assign({},prev.secB);var rw=sc[sk].slice();rw[i]=Object.assign({},rw[i],{[field]:val});sc[sk]=rw;return Object.assign({},prev,{secB:sc});});}
+  function upd5SB(sk,sid,field,val){setD(function(prev){var sc=Object.assign({},prev.secB);var s5=Object.assign({},sc[sk]);s5[sid]=Object.assign({},s5[sid]||{},{[field]:val});sc[sk]=s5;return Object.assign({},prev,{secB:sc});});}
+  function updInteg(mid,val){setD(function(prev){var ig=Object.assign({},prev.integ);ig[mid]=Object.assign({},ig[mid]||{},{anotaciones:val});return Object.assign({},prev,{integ:ig});});}
+  function updAcc(field,val){setD(function(prev){return Object.assign({},prev,{acciones:Object.assign({},prev.acciones,{[field]:val})});});}
+  function addReun(){setD(function(prev){return Object.assign({},prev,{reuniones:(prev.reuniones||[]).concat([{fecha:TODAY,notas:''}])});});}
+  function updReun(i,field,val){setD(function(prev){var rs=prev.reuniones.slice();rs[i]=Object.assign({},rs[i],{[field]:val});return Object.assign({},prev,{reuniones:rs});});}
+  function save(){if(p.onSave)p.onSave(dRef.current);setOk(true);setTimeout(function(){setOk(false);},3000);}
+  var sH={fontSize:17,fontWeight:700,color:P,margin:'14px 0 6px',paddingBottom:3,borderBottom:'1px solid '+P+'33'};
+  var pH={color:'#fff',padding:'8px 14px',borderRadius:8,fontSize:17,fontWeight:700,marginTop:16,marginBottom:10};
+  function ScoreSel(val,onCh){
+    if(readOnly){
+      if(!val)return(<span style={{color:MU,fontSize:15}}>—</span>);
+      return(<span style={{background:PSUP_COL[val]+'22',color:PSUP_COL[val],padding:'2px 10px',borderRadius:20,fontSize:15,fontWeight:700,whiteSpace:'nowrap'}}>{val} — {(['','Pésimo','Malo','Regular','Bueno','Excelente'])[parseInt(val)]||''}</span>);
+    }
+    return(
+      <div style={{display:'flex',gap:3,flexShrink:0}}>
+        {['1','2','3','4','5'].map(function(pp){var sel=val===pp;return(<button key={pp} onClick={function(){onCh({target:{value:sel?'':pp}});}} style={{border:'none',borderRadius:4,padding:'4px 9px',cursor:'pointer',fontWeight:sel?700:400,fontSize:16,background:sel?PSUP_COL[pp]:BO,color:sel?'#fff':'#555',lineHeight:1,flexShrink:0}}>{pp}</button>);})}</div>
+    );
+  }
+  function rnSecs(SECS,secData,updFn,upd5Fn){
+    return SECS.map(function(sec){
+      var rows=secData[sec.key];
+      return(
+        <div key={sec.key}>
+          <p style={sH}>{sec.title}</p>
+          {sec.es5S?(
+            <div>{sec.items.map(function(it){var sv=(rows||{})[it.id]||{};return(
+              <Card key={it.id} style={{marginBottom:7,borderLeft:'3px solid '+P}}>
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:8,marginBottom:6}}>
+                  <div style={{flex:1}}><div style={{fontWeight:700,fontSize:16,color:P}}>{it.label}</div><div style={{fontSize:14,color:MU,lineHeight:1.3}}>{it.desc}</div></div>
+                  {ScoreSel(sv.puntaje,function(e){upd5Fn(sec.key,it.id,'puntaje',e.target.value);})}
+                </div>
+                {!readOnly&&<input value={sv.comentario||''} onChange={function(e){upd5Fn(sec.key,it.id,'comentario',e.target.value);}} placeholder='Comentario...' style={inp({fontSize:15,padding:'5px 8px'})}/>}
+                {readOnly&&sv.comentario&&<div style={{fontSize:15,color:MU,fontStyle:'italic'}}>{sv.comentario}</div>}
+              </Card>
+            );})}
+            </div>
+          ):sec.esFidelidad?(
+            <div>{(rows||[]).map(function(row,i){return(
+              <Card key={i} style={{marginBottom:6}}>
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:8,marginBottom:row.comentario&&readOnly?6:0}}>
+                  <p style={{margin:0,fontSize:16,flex:1,lineHeight:1.3}}>{row.item}</p>
+                  {readOnly?(<span style={{background:(row.respuesta==='Sí'?G:row.respuesta==='No'?R:MU)+'22',color:row.respuesta==='Sí'?G:row.respuesta==='No'?R:MU,padding:'2px 10px',borderRadius:20,fontSize:15,fontWeight:700}}>{row.respuesta||'—'}</span>):(
+                    <select value={row.respuesta||''} onChange={function(e){updFn(sec.key,i,'respuesta',e.target.value);}} style={{padding:'4px 8px',borderRadius:6,border:'1px solid '+BO,fontSize:15,fontFamily:'inherit',minWidth:70}}>
+                      <option value=''>—</option><option value='Sí'>Sí</option><option value='No'>No</option>
+                    </select>
+                  )}
+                </div>
+                {!readOnly&&<input value={row.comentario||''} onChange={function(e){updFn(sec.key,i,'comentario',e.target.value);}} placeholder='Comentario...' style={inp({fontSize:15,padding:'5px 8px',marginTop:6})}/>}
+                {readOnly&&row.comentario&&<div style={{fontSize:15,color:MU,fontStyle:'italic',marginTop:4}}>{row.comentario}</div>}
+              </Card>
+            );})}
+            </div>
+          ):(
+            <div>{(rows||[]).map(function(row,i){return(
+              <Card key={i} style={{marginBottom:6}}>
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:8,marginBottom:6}}>
+                  <p style={{margin:0,fontSize:16,flex:1,lineHeight:1.3}}>{row.item}</p>
+                  {ScoreSel(row.puntaje,function(e){updFn(sec.key,i,'puntaje',e.target.value);})}
+                </div>
+                {!readOnly&&<input value={row.comentario||''} onChange={function(e){updFn(sec.key,i,'comentario',e.target.value);}} placeholder='Comentario...' style={inp({fontSize:15,padding:'5px 8px'})}/>}
+                {readOnly&&row.comentario&&<div style={{fontSize:15,color:MU,fontStyle:'italic'}}>{row.comentario}</div>}
+              </Card>
+            );})}
+            </div>
+          )}
+        </div>
+      );
+    });
+  }
+  return (
+    <div>
+      {ok&&<div style={{background:G,color:'#fff',borderRadius:10,padding:'10px 16px',marginBottom:12,textAlign:'center',fontWeight:700,fontSize:17,position:'sticky',top:0,zIndex:10}}>✅ Guardado correctamente</div>}
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8}}>
+        <p style={{fontSize:20,fontWeight:700,color:P,margin:0,letterSpacing:0.2}}>Formato de Supervisión al RP</p>
+        {!readOnly&&<Btn small variant='success' onClick={save}>💾 Guardar</Btn>}
+      </div>
+      {/* ── PARTE A ──────────────────────────────────────────────────────────── */}
+      <div style={Object.assign({},pH,{background:P})}>PARTE A — Conocimiento, habilidades y organización del RP</div>
+      <p style={{fontSize:15,color:MU,marginTop:0,marginBottom:12,fontStyle:'italic'}}>Se diligencia en la reunión del Supervisor/a con el Responsable Pastoral.</p>
+      {/* Preguntas personales */}
+      <p style={sH}>🙏 Primero unas preguntas para ti{p.rpNombre?', '+(p.rpNombre.split(' ')[0]):''}:</p>
+      {[['oracion','¿Cómo está tu vida de oración y tu relación con el Señor?'],['salud','¿Cómo está tu salud?'],['retos','¿Qué retos estás enfrentando en tu vida en este momento?'],['alianza','¿Estás viviendo plenamente tu Alianza?']].map(function(q){var v=d.pregPersonales[q[0]]||'';return(
+        <div key={q[0]} style={{marginBottom:8}}>
+          <div style={{fontSize:16,color:MU,fontWeight:600,marginBottom:3}}>{q[1]}</div>
+          {readOnly?(<div style={{fontSize:15,padding:'5px 8px',background:BG,borderRadius:7,minHeight:28}}>{v||'—'}</div>):(<textarea value={v} onChange={function(e){updPP(q[0],e.target.value);}} style={inp({minHeight:44,resize:'vertical',fontSize:15})}/>)}
+        </div>
+      );})}
+      {/* Secciones A */}
+      {rnSecs(SECCIONES_SUPRP_A,d.secA,updRowA,null)}
+      {(function(){
+        var criticas=[],desarrollo=[],consolidadas=[];
+        SECCIONES_SUPRP_A.forEach(function(sec){(d.secA[sec.key]||[]).forEach(function(row){if(!row.puntaje)return;var pv=parseInt(row.puntaje);var e2={sec:sec.title,item:row.item,puntaje:row.puntaje};if(pv<=2)criticas.push(e2);else if(pv===3)desarrollo.push(e2);else consolidadas.push(e2);});});
+        if(!criticas.length&&!desarrollo.length&&!consolidadas.length)return null;
+        return(
+          <div style={{background:'#F7FAFC',border:'1.5px solid '+BO,borderRadius:10,padding:12,margin:'10px 0 14px'}}>
+            <p style={{margin:'0 0 8px',fontWeight:700,fontSize:17,color:P}}>📊 Resumen — Evaluación del RP</p>
+            {criticas.length>0&&(<div style={{marginBottom:8}}><div style={{fontSize:15,fontWeight:700,color:R,marginBottom:4}}>🔴 Áreas críticas — requieren plan de acción ({criticas.length})</div>{criticas.map(function(a,i){return(<div key={i} style={{display:'flex',alignItems:'flex-start',gap:6,padding:'3px 0',borderBottom:'1px solid '+BO+'33'}}><span style={{background:PSUP_COL[a.puntaje]+'22',color:PSUP_COL[a.puntaje],padding:'1px 7px',borderRadius:10,fontSize:14,fontWeight:700,flexShrink:0}}>{a.puntaje}</span><span style={{fontSize:14,color:MU,flexShrink:0,paddingTop:1}}>{a.sec.split('.')[0].trim()}.</span><span style={{fontSize:15,lineHeight:1.3}}>{a.item}</span></div>);})}</div>)}
+            {desarrollo.length>0&&(<div style={{marginBottom:8}}><div style={{fontSize:15,fontWeight:700,color:'#718096',marginBottom:4}}>⚫ En desarrollo — monitorear ({desarrollo.length})</div>{desarrollo.map(function(a,i){return(<div key={i} style={{display:'flex',alignItems:'flex-start',gap:6,padding:'3px 0',borderBottom:'1px solid '+BO+'33'}}><span style={{background:PSUP_COL[a.puntaje]+'22',color:PSUP_COL[a.puntaje],padding:'1px 7px',borderRadius:10,fontSize:14,fontWeight:700,flexShrink:0}}>{a.puntaje}</span><span style={{fontSize:14,color:MU,flexShrink:0,paddingTop:1}}>{a.sec.split('.')[0].trim()}.</span><span style={{fontSize:15,lineHeight:1.3}}>{a.item}</span></div>);})}</div>)}
+            {consolidadas.length>0&&(<div><div style={{fontSize:15,fontWeight:700,color:G,marginBottom:4}}>🟢 Áreas consolidadas — sin acción requerida ({consolidadas.length})</div>{consolidadas.map(function(a,i){return(<div key={i} style={{display:'flex',alignItems:'flex-start',gap:6,padding:'3px 0',borderBottom:'1px solid '+BO+'33'}}><span style={{background:PSUP_COL[a.puntaje]+'22',color:PSUP_COL[a.puntaje],padding:'1px 7px',borderRadius:10,fontSize:14,fontWeight:700,flexShrink:0}}>{a.puntaje}</span><span style={{fontSize:14,color:MU,flexShrink:0,paddingTop:1}}>{a.sec.split('.')[0].trim()}.</span><span style={{fontSize:15,lineHeight:1.3}}>{a.item}</span></div>);})}</div>)}
+          </div>
+        );
+      })()}
+      {/* Síntesis */}
+      <p style={sH}>📌 Síntesis del Supervisor/a</p>
+      {[['areasCrec','🔹 Áreas de crecimiento como pastor/a'],['pautas','📌 Pautas pastorales ofrecidas'],['compromisos','✅ Compromisos del RP']].map(function(f){var v=d.sintesis[f[0]]||'';return(
+        <div key={f[0]} style={{marginBottom:8}}>
+          <div style={{fontSize:16,color:MU,fontWeight:600,marginBottom:3}}>{f[1]}</div>
+          {readOnly?(<div style={{fontSize:15,padding:'5px 8px',background:BG,borderRadius:7,minHeight:28}}>{v||'—'}</div>):(<textarea value={v} onChange={function(e){updSintesis(f[0],e.target.value);}} style={inp({minHeight:60,resize:'vertical',fontSize:15})}/>)}
+        </div>
+      );})}
+      {/* ── PARTE B ──────────────────────────────────────────────────────────── */}
+      <div style={Object.assign({},pH,{background:'#1A5276',marginTop:20})}>PARTE B — Reporte de RP de su Grupo Pastoral</div>
+      <p style={{fontSize:15,color:MU,marginTop:0,marginBottom:12,fontStyle:'italic'}}>El RP informa al Supervisor/a sobre el estado de su grupo.</p>
+      {/* Secciones B */}
+      {rnSecs(SECCIONES_SUPRP_B,d.secB,updRowB,upd5SB)}
+      {(function(){
+        var criticas=[],desarrollo=[],consolidadas=[];
+        SECCIONES_SUPRP_B.forEach(function(sec){
+          if(sec.es5S){var s5=d.secB[sec.key]||{};sec.items.forEach(function(it){var sv=s5[it.id]||{};if(!sv.puntaje)return;var pv=parseInt(sv.puntaje);var e2={sec:sec.title,item:it.label,puntaje:sv.puntaje};if(pv<=2)criticas.push(e2);else if(pv===3)desarrollo.push(e2);else consolidadas.push(e2);});}
+          else if(!sec.esFidelidad){(d.secB[sec.key]||[]).forEach(function(row){if(!row.puntaje)return;var pv=parseInt(row.puntaje);var e2={sec:sec.title,item:row.item,puntaje:row.puntaje};if(pv<=2)criticas.push(e2);else if(pv===3)desarrollo.push(e2);else consolidadas.push(e2);});}
+        });
+        if(!criticas.length&&!desarrollo.length&&!consolidadas.length)return null;
+        return(
+          <div style={{background:'#F7FAFC',border:'1.5px solid '+BO,borderRadius:10,padding:12,margin:'10px 0 14px'}}>
+            <p style={{margin:'0 0 8px',fontWeight:700,fontSize:17,color:'#1A5276'}}>📊 Resumen — Estado del GP</p>
+            {criticas.length>0&&(<div style={{marginBottom:8}}><div style={{fontSize:15,fontWeight:700,color:R,marginBottom:4}}>🔴 Áreas críticas — requieren acción en el GP ({criticas.length})</div>{criticas.map(function(a,i){return(<div key={i} style={{display:'flex',alignItems:'flex-start',gap:6,padding:'3px 0',borderBottom:'1px solid '+BO+'33'}}><span style={{background:PSUP_COL[a.puntaje]+'22',color:PSUP_COL[a.puntaje],padding:'1px 7px',borderRadius:10,fontSize:14,fontWeight:700,flexShrink:0}}>{a.puntaje}</span><span style={{fontSize:14,color:MU,flexShrink:0,paddingTop:1}}>{a.sec.split('.')[0].trim()}.</span><span style={{fontSize:15,lineHeight:1.3}}>{a.item}</span></div>);})}</div>)}
+            {desarrollo.length>0&&(<div style={{marginBottom:8}}><div style={{fontSize:15,fontWeight:700,color:'#718096',marginBottom:4}}>⚫ En desarrollo — monitorear ({desarrollo.length})</div>{desarrollo.map(function(a,i){return(<div key={i} style={{display:'flex',alignItems:'flex-start',gap:6,padding:'3px 0',borderBottom:'1px solid '+BO+'33'}}><span style={{background:PSUP_COL[a.puntaje]+'22',color:PSUP_COL[a.puntaje],padding:'1px 7px',borderRadius:10,fontSize:14,fontWeight:700,flexShrink:0}}>{a.puntaje}</span><span style={{fontSize:14,color:MU,flexShrink:0,paddingTop:1}}>{a.sec.split('.')[0].trim()}.</span><span style={{fontSize:15,lineHeight:1.3}}>{a.item}</span></div>);})}</div>)}
+            {consolidadas.length>0&&(<div><div style={{fontSize:15,fontWeight:700,color:G,marginBottom:4}}>🟢 Áreas consolidadas — sin acción requerida ({consolidadas.length})</div>{consolidadas.map(function(a,i){return(<div key={i} style={{display:'flex',alignItems:'flex-start',gap:6,padding:'3px 0',borderBottom:'1px solid '+BO+'33'}}><span style={{background:PSUP_COL[a.puntaje]+'22',color:PSUP_COL[a.puntaje],padding:'1px 7px',borderRadius:10,fontSize:14,fontWeight:700,flexShrink:0}}>{a.puntaje}</span><span style={{fontSize:14,color:MU,flexShrink:0,paddingTop:1}}>{a.sec.split('.')[0].trim()}.</span><span style={{fontSize:15,lineHeight:1.3}}>{a.item}</span></div>);})}</div>)}
+          </div>
+        );
+      })()}
+      {/* Cuadro de Integrantes */}
+      <p style={sH}>👥 Cuadro de Integrantes</p>
+      {miembros.length===0&&<p style={{fontSize:15,color:MU,fontStyle:'italic'}}>Sin integrantes registrados.</p>}
+      {miembros.map(function(m){var iv=d.integ[m.id]||{};return(
+        <Card key={m.id} style={{marginBottom:8,borderLeft:'3px solid '+A}}>
+          <p style={{margin:'0 0 6px',fontWeight:700,fontSize:17}}>{m.nombre}</p>
+          <div style={{fontSize:14,color:MU,fontWeight:600,marginBottom:2}}>Anotaciones generales</div>
+          {readOnly?(<div style={{fontSize:15,padding:'5px 8px',background:BG,borderRadius:7,minHeight:28}}>{iv.anotaciones||'—'}</div>):(<textarea value={iv.anotaciones||''} onChange={function(e){updInteg(m.id,e.target.value);}} style={inp({minHeight:52,resize:'vertical',fontSize:15})} placeholder='Situaciones de vida, necesidades, fidelidad a la Alianza, compromisos, etc.'/>)}
+        </Card>
+      );})}
+      {/* Acciones */}
+      <p style={sH}>🎯 Acciones a partir de la Supervisión</p>
+      {[['corregir','🔴 Corregir en el GP'],['prevenir','🟡 Prevenir en el GP'],['fomentar','🟢 Fomentar en el GP'],['potenciar','🔵 Potenciar en el GP'],['obsRS','📝 Observaciones del RS']].map(function(ac){var v=d.acciones[ac[0]]||'';return(
+        <div key={ac[0]} style={{marginBottom:8}}>
+          <div style={{fontSize:16,color:MU,fontWeight:600,marginBottom:3}}>{ac[1]}</div>
+          {readOnly?(<div style={{fontSize:15,padding:'5px 8px',background:BG,borderRadius:7,minHeight:28}}>{v||'—'}</div>):(<textarea value={v} onChange={function(e){updAcc(ac[0],e.target.value);}} style={inp({minHeight:48,resize:'vertical',fontSize:15})}/>)}
+        </div>
+      );})}
+      {/* Reuniones */}
+      <p style={sH}>📅 Reuniones de Supervisión al RP</p>
+      {!readOnly&&<Btn small variant='outline' onClick={addReun} style={{marginBottom:8}}>+ Agregar reunión</Btn>}
+      {(!d.reuniones||!d.reuniones.length)&&<p style={{fontSize:15,color:MU,fontStyle:'italic'}}>Sin reuniones registradas aún.</p>}
+      {(d.reuniones||[]).map(function(r,i){return(
+        <Card key={i} style={{marginBottom:6}}>
+          <div style={{display:'grid',gridTemplateColumns:'auto 1fr',gap:8}}>
+            <div><div style={{fontSize:14,color:MU,fontWeight:600,marginBottom:2}}>Fecha</div>{readOnly?<span style={{fontSize:15}}>{fmt(r.fecha)||'—'}</span>:<input type='date' value={r.fecha||''} onChange={function(e){updReun(i,'fecha',e.target.value);}} style={inp({fontSize:15,padding:'5px 8px'})}/>}</div>
+            <div><div style={{fontSize:14,color:MU,fontWeight:600,marginBottom:2}}>Notas</div>{readOnly?<span style={{fontSize:15}}>{r.notas||'—'}</span>:<input value={r.notas||''} onChange={function(e){updReun(i,'notas',e.target.value);}} style={inp({fontSize:15,padding:'5px 8px'})} placeholder='Notas de la reunión...'/>}</div>
+          </div>
+        </Card>
+      );})}
+      {!readOnly&&<div style={{marginTop:14}}><Btn variant='success' onClick={save} style={{width:'100%',padding:12}}>💾 Guardar Supervisión al RP</Btn></div>}
+    </div>
+  );
+}
+
+
 // ─── VIEW GRUPO ──────────────────────────────────────────────────────────────
 function getPrioridades(plans,mId){var ppp=plans.miembros&&plans.miembros[mId];if(!ppp||typeof ppp!=='object'||!ppp.autoeval)return[];var pr=[];SECCIONES_PPP.forEach(function(sec){(ppp.autoeval[sec.key]||[]).forEach(function(row){if(row.puntaje==='1'||row.puntaje==='2')pr.push({item:row.item,puntaje:row.puntaje,sec:sec.title.split('.')[1]?sec.title.split('.')[1].trim():sec.title});});});return pr.sort(function(a,b){return parseInt(a.puntaje)-parseInt(b.puntaje);});}
 function VGHermanos(p){var mb=p.mb,semR=p.semR,evs=p.evs,plans=p.plans;function ap(mId,tipo){var f=tipo?evs.filter(function(e){return e.tipo===tipo;}):evs;if(!f.length)return 0;return Math.round(f.filter(function(e){return (e.asistentes||[]).includes(mId);}).length/f.length*100);}return(<div>{mb.map(function(m){var n=semR.filter(function(x){return x.miembroId===m.id;}).length;var ppp=plans.miembros&&plans.miembros[m.id];var prs=getPrioridades(plans,m.id);return(<Card key={m.id} style={{marginBottom:10}}><div style={{display:'flex',justifyContent:'space-between',marginBottom:8}}><div><p style={{margin:0,fontWeight:700,fontSize:18}}>{m.nombre}</p>{ppp&&ppp.info&&<p style={{margin:'2px 0 0',fontSize:16,color:MU}}>{ppp.info.compromiso||''}{hasServ(ppp.info.servicios)?' · '+fmtServ(ppp.info.servicios):''}</p>}</div><span style={{background:(n>=4?G:n>=2?W:R)+'22',color:n>=4?G:n>=2?W:R,fontSize:16,padding:'2px 8px',borderRadius:20,fontWeight:600}}>{n}/4 PP</span></div>{evs.length>0&&(<div style={{display:'flex',justifyContent:'space-around',padding:'6px 0',borderTop:'1px solid '+BO,borderBottom:'1px solid '+BO,marginBottom:8}}><Donut pct={ap(m.id,'Asamblea de Oración')} label="Asambleas"/><Donut pct={ap(m.id,'Reunión del Grupo Pastoral')} label="Grupo"/><Donut pct={ap(m.id,'Retiro')} label="Retiro"/><Donut pct={ap(m.id,'Curso')} label="Curso"/></div>)}{prs.length>0&&(<div style={{background:LI,borderRadius:7,padding:'6px 10px'}}><p style={{margin:'0 0 4px',fontSize:16,fontWeight:700}}>🎯 Áreas prioritarias:</p>{prs.slice(0,3).map(function(pr,i){return <div key={i} style={{fontSize:15,color:pr.puntaje==='1'?R:W,marginBottom:2}}>● <strong>{pr.sec}:</strong> {pr.item}</div>;})}</div>)}</Card>);})}</div>);}
@@ -1484,7 +1861,7 @@ function ViewGrupo(p){
   var evs=(att.eventos||[]).filter(function(e){return e.gId===group.id;});
   var semR=meetings.filter(function(m){return m.rpId===rpId&&m.semestre===CSEM&&m.realizada;});
   var [tab,setTab]=useState('hermanos');
-  var TABS=[{id:'hermanos',lb:'👥 Hermanos'},{id:'ppg',lb:'📋 PPG'},{id:'ppp',lb:'📝 PPP'},{id:'asist',lb:'✅ Asistencia'},{id:'reuniones',lb:'📅 Reuniones'}];
+  var TABS=[{id:'hermanos',lb:'👥 Hermanos'},{id:'ppg',lb:'📋 PPG'},{id:'ppp',lb:'📝 PPP'},{id:'asist',lb:'✅ Asistencia'},{id:'reuniones',lb:'📅 Reuniones'},{id:'supgp',lb:'👁 Visita GP'},{id:'suprp',lb:'👤 Sup. RP'}];
   return (
     <div style={{fontFamily:'system-ui'}}>
       <div style={{background:P,color:'#fff',padding:'14px 16px 10px'}}><button onClick={p.onBack} style={{background:'none',border:'none',color:'#ffffffcc',cursor:'pointer',fontSize:17,padding:'0 0 6px 0',display:'block'}}>← Volver al Panel</button><h2 style={{margin:0,fontSize:20,fontWeight:700}}>{group.nombre}</h2><p style={{margin:'3px 0 0',fontSize:16,opacity:0.8}}>RP: {rpNombre} · Sector {group.sector}</p></div>
@@ -1495,6 +1872,8 @@ function ViewGrupo(p){
         {tab==='ppp'&&<VGPpp mb={mb} plans={plans}/>}
         {tab==='asist'&&<VGAsist evs={evs} mb={mb}/>}
         {tab==='reuniones'&&<VGReuniones meetings={meetings} rpId={rpId}/>}
+        {tab==='supgp'&&<SupGPForm data={(p.allSupForms||{})[rpId]&&(p.allSupForms||{})[rpId][p.sem||CSEM]?((p.allSupForms||{})[rpId])[p.sem||CSEM].supGP:null} readOnly={p.readOnly} sem={p.sem||CSEM} onSave={function(d){if(p.onSaveSupForm)p.onSaveSupForm(rpId,p.sem||CSEM,'supGP',d);}}/>}
+        {tab==='suprp'&&<SupRPForm data={(p.allSupForms||{})[rpId]&&(p.allSupForms||{})[rpId][p.sem||CSEM]?((p.allSupForms||{})[rpId])[p.sem||CSEM].supRP:null} miembros={mbPPG} readOnly={p.readOnly} sem={p.sem||CSEM} rpNombre={rpNombre} onSave={function(d){if(p.onSaveSupForm)p.onSaveSupForm(rpId,p.sem||CSEM,'supRP',d);}}/>}
       </div>
     </div>
   );
@@ -1503,6 +1882,9 @@ function ViewGrupo(p){
 // ─── MIS CITAS DE SUPERVISIÓN (vista del Supervisor como supervisado) ────────
 function MiSupervision(p){
   var user=p.user,supMtgs=p.supMeetings||[],dynUsers=p.users||USERS;
+  var sem=p.sem||CSEM;
+  var sint=((p.allSupForms||{})[user.id]||{})[sem];
+  sint=sint&&sint.supRP&&sint.supRP.sintesis?sint.supRP.sintesis:null;
   var myMtgs=supMtgs.filter(function(m){return m.rpId===user.id;}).sort(function(a,b){return (a.fecha||'').localeCompare(b.fecha||'');});
   var upcoming=myMtgs.filter(function(m){return !m.realizada;});
   var past=myMtgs.filter(function(m){return m.realizada;}).reverse();
@@ -1512,6 +1894,14 @@ function MiSupervision(p){
     <div style={{padding:'20px 16px 100px',fontFamily:'system-ui'}}>
       <h2 style={{color:'#1A6FA8',fontSize:21,fontWeight:700,margin:'0 0 2px'}}>👁 Mis Citas de Supervisión</h2>
       <p style={{color:MU,fontSize:17,margin:'0 0 14px'}}>{user.nombre} · {CSEM} · citas que te han agendado</p>
+      {sint&&(sint.areasCrec||sint.pautas||sint.compromisos)&&(
+        <div style={{background:'#EDF2FF',border:'1.5px solid #AED6F1',borderRadius:12,padding:'14px 16px',marginBottom:18}}>
+          <p style={{margin:'0 0 10px',fontWeight:700,fontSize:17,color:P}}>📌 Mi Síntesis de Supervisión — {sem}</p>
+          {sint.areasCrec&&(<div style={{marginBottom:8}}><div style={{fontSize:15,fontWeight:700,color:P,marginBottom:2}}>🔹 Áreas de crecimiento como pastor/a</div><div style={{fontSize:16,color:'#2D3748',lineHeight:1.5}}>{sint.areasCrec}</div></div>)}
+          {sint.pautas&&(<div style={{marginBottom:8}}><div style={{fontSize:15,fontWeight:700,color:P,marginBottom:2}}>📌 Pautas pastorales</div><div style={{fontSize:16,color:'#2D3748',lineHeight:1.5}}>{sint.pautas}</div></div>)}
+          {sint.compromisos&&(<div><div style={{fontSize:15,fontWeight:700,color:G,marginBottom:2}}>✅ Compromisos</div><div style={{fontSize:16,color:'#2D3748',lineHeight:1.5}}>{sint.compromisos}</div></div>)}
+        </div>
+      )}
       {myMtgs.length===0&&(<div style={{background:CA,borderRadius:12,padding:32,textAlign:'center',color:MU,border:'1.5px solid '+BO}}><div style={{fontSize:39}}>🔄</div><p style={{fontSize:18,margin:'8px 0 0'}}>Aún no tienes citas de supervisión agendadas.</p></div>)}
       {upcoming.length>0&&(<div style={{marginBottom:16}}><p style={{fontSize:17,fontWeight:700,color:P,margin:'0 0 8px'}}>PRÓXIMAS ({upcoming.length})</p>{upcoming.map(function(m){var t=getTipo(m.tipo);return(<div key={m.id} style={{background:CA,borderRadius:12,padding:'12px 14px',marginBottom:8,border:'1.5px solid '+t.color+'44'}}><div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4}}><span style={{fontSize:21}}>{t.icon}</span><span style={{background:t.color+'22',color:t.color,fontSize:16,padding:'2px 8px',borderRadius:20,fontWeight:700}}>{t.label}</span></div><p style={{margin:0,fontSize:18,fontWeight:600,color:'#071F33'}}>{supLabel(m)}</p><p style={{margin:'3px 0 0',fontSize:16,color:MU}}>{fmt(m.fecha)}{m.hora?' · '+m.hora:''}{m.modalidad?' · '+m.modalidad:''}</p>{m.notas&&<p style={{margin:'5px 0 0',fontSize:16,color:MU,fontStyle:'italic'}}>"{m.notas}"</p>}</div>);})}</div>)}
       {past.length>0&&(<div><p style={{fontSize:17,fontWeight:700,color:P,margin:'0 0 8px'}}>REALIZADAS ({past.length})</p>{past.map(function(m){var t=getTipo(m.tipo);return(<div key={m.id} style={{background:CA,borderRadius:12,padding:'12px 14px',marginBottom:8,border:'1.5px solid '+BO,opacity:0.85}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}><div><div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4}}><span style={{fontSize:18}}>{t.icon}</span><span style={{background:t.color+'22',color:t.color,fontSize:16,padding:'2px 8px',borderRadius:20,fontWeight:700}}>{t.label}</span></div><p style={{margin:0,fontSize:17,fontWeight:600}}>{supLabel(m)}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>{fmt(m.fechaReal||m.fecha)}</p>{m.notasReunion&&<p style={{margin:'4px 0 0',fontSize:16,color:MU,fontStyle:'italic'}}>"{m.notasReunion}"</p>}{m.pautas&&<div style={{margin:'6px 0 0',padding:'6px 8px',background:P+'10',borderRadius:6,fontSize:16}}><strong style={{color:P}}>Pautas: </strong>{m.pautas}</div>}</div><span style={{background:G+'22',color:G,fontSize:16,padding:'2px 8px',borderRadius:20,fontWeight:600,whiteSpace:'nowrap'}}>✓</span></div></div>);})}</div>)}
@@ -1552,7 +1942,29 @@ function Supervision(p){
     return{mb:mb,real:real,meta:meta,pct:meta>0?Math.round(real/meta*100):0,gn:gn,noGP:!g};
   }
   var tM=rps.reduce(function(a,r){return a+st(r).meta;},0),tR=rps.reduce(function(a,r){return a+st(r).real;},0),gP=tM>0?Math.round(tR/tM*100):0;
-  if(verGrupo)return <ViewGrupo group={verGrupo.group} rpId={verGrupo.rpId} rpNombre={verGrupo.rpNombre} allPlans={allPlans} allAtt={allAtt} meetings={meetings} addSelf={dynGroups.some(function(g){return g.id!==verGrupo.group.id&&g.miembros.some(function(m){return m.userId===verGrupo.rpId;});})} onBack={function(){setVerGrupo(null);}}/>;
+  var [verSupForm,setVerSupForm]=useState(null);
+  if(verGrupo){var vgROnly=!(user.id===verGrupo.rpId||dynUsers.some(function(u){return u.id===verGrupo.rpId&&u.supId===user.id;}));return <ViewGrupo group={verGrupo.group} rpId={verGrupo.rpId} rpNombre={verGrupo.rpNombre} allPlans={allPlans} allAtt={allAtt} meetings={meetings} addSelf={dynGroups.some(function(g){return g.id!==verGrupo.group.id&&g.miembros.some(function(m){return m.userId===verGrupo.rpId;});})} onBack={function(){setVerGrupo(null);}} allSupForms={p.allSupForms||{}} onSaveSupForm={p.onSaveSupForm} readOnly={vgROnly} sem={p.sem||CSEM}/>;}
+  if(verSupForm){
+    var sfRpId=verSupForm.rpId;
+    var sfSem=p.sem||CSEM;
+    var sfGrp=dynGroups.find(function(g){return g.rpId===sfRpId;});
+    var sfMb=sfGrp?sfGrp.miembros.filter(function(m){return !m.rpOverride;}):[];
+    var sfForms=(p.allSupForms||{})[sfRpId]&&(p.allSupForms||{})[sfRpId][sfSem]?((p.allSupForms||{})[sfRpId])[sfSem]:{};
+    return(
+      <div style={{fontFamily:'system-ui'}}>
+        <div style={{background:P,color:'#fff',padding:'14px 16px 10px'}}>
+          <button onClick={function(){setVerSupForm(null);}} style={{background:'none',border:'none',color:'#ffffffcc',cursor:'pointer',fontSize:17,padding:'0 0 6px 0',display:'block'}}>← Volver</button>
+          <h2 style={{margin:0,fontSize:20,fontWeight:700}}>{verSupForm.tipo==='supGP'?'📊 Supervisión al GP':'👤 Supervisión al RP'}</h2>
+          <p style={{margin:'3px 0 0',fontSize:16,opacity:0.8}}>RP: {verSupForm.rpNombre}{verSupForm.groupNombre?' · '+verSupForm.groupNombre:''}</p>
+          <div style={{marginTop:8}}><Btn small variant='accent' onClick={function(){printSupervision(verSupForm.rpNombre,verSupForm.groupNombre||'',sfForms.supRP,sfForms.supGP,sfMb,sfSem);}}>⬇️ Imprimir Supervisión</Btn></div>
+        </div>
+        <div style={{padding:'14px 14px 100px'}}>
+          {verSupForm.tipo==='supGP'&&<SupGPForm data={sfForms.supGP} readOnly={verSupForm.readOnly} sem={sfSem} onSave={function(d){if(p.onSaveSupForm)p.onSaveSupForm(sfRpId,sfSem,'supGP',d);}}/>}
+          {verSupForm.tipo==='supRP'&&<SupRPForm data={sfForms.supRP} miembros={sfMb} readOnly={verSupForm.readOnly} sem={sfSem} rpNombre={verSupForm.rpNombre} onSave={function(d){if(p.onSaveSupForm)p.onSaveSupForm(sfRpId,sfSem,'supRP',d);}}/>}
+        </div>
+      </div>
+    );
+  }
   var TABS=isRp?[{id:'cadena',lb:'🔄 Mis Reuniones'}]:[{id:'panel',lb:'📊 Panel'},{id:'cadena',lb:'🔄 Ciclo de Supervisión'}];
   return (
     <div style={{fontFamily:'system-ui'}}>
@@ -1576,10 +1988,10 @@ function Supervision(p){
               var pend=supMtgsList.some(function(sm){return sm.semestre===CSEM&&sm.tipo===ct.id&&!sm.realizada&&(rpId2?sm.rpId===rpId2:sm.supId===supIdChk);});
               return{id:ct.id,ic:ct.ic,lb:ct.lb,done:done,pend:pend};
             });
-            return(<Card key={rp.id} style={{marginBottom:10}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:6}}><div><p style={{margin:0,fontWeight:700,fontSize:18}}>{rp.nombre}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>{s.gn} · {s.mb} hermanos/as</p></div><div style={{textAlign:'right'}}><div style={{fontSize:20,fontWeight:700,color:s.pct>=100?G:s.pct>=50?W:R}}>{s.pct}%</div><div style={{fontSize:15,color:MU}}>{s.real}/{s.meta} PP</div></div></div><Bar val={s.real} max={s.meta||1} color={s.pct>=100?G:s.pct>=50?A:R}/><div style={{display:'flex',gap:4,flexWrap:'wrap',marginTop:8}}>{cicloStatus.map(function(cs){return(<span key={cs.id} style={{fontSize:13,padding:'2px 8px',borderRadius:20,fontWeight:600,background:cs.done?G+'22':cs.pend?W+'22':BO+'88',color:cs.done?G:cs.pend?W:MU,whiteSpace:'nowrap'}}>{cs.ic} {cs.done?'✓ ':cs.pend?'⏳ ':'— '}{cs.lb}</span>);})}</div>{grp&&<div style={{marginTop:8}}><Btn small variant='outline' onClick={function(){setVerGrupo({rpId:rp.id,rpNombre:rp.nombre,group:grp});}}>📂 Ver grupo completo</Btn></div>}</Card>);})})()}
+            return(<Card key={rp.id} style={{marginBottom:10}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:6}}><div><p style={{margin:0,fontWeight:700,fontSize:18}}>{rp.nombre}</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>{s.gn} · {s.mb} hermanos/as</p></div><div style={{textAlign:'right'}}><div style={{fontSize:20,fontWeight:700,color:s.pct>=100?G:s.pct>=50?W:R}}>{s.pct}%</div><div style={{fontSize:15,color:MU}}>{s.real}/{s.meta} PP</div></div></div><Bar val={s.real} max={s.meta||1} color={s.pct>=100?G:s.pct>=50?A:R}/><div style={{display:'flex',gap:4,flexWrap:'wrap',marginTop:8}}>{cicloStatus.map(function(cs){return(<span key={cs.id} style={{fontSize:13,padding:'2px 8px',borderRadius:20,fontWeight:600,background:cs.done?G+'22':cs.pend?W+'22':BO+'88',color:cs.done?G:cs.pend?W:MU,whiteSpace:'nowrap'}}>{cs.ic} {cs.done?'✓ ':cs.pend?'⏳ ':'— '}{cs.lb}</span>);})}</div>{grp&&<div style={{marginTop:8,display:'flex',gap:6,flexWrap:'wrap'}}><Btn small variant='outline' onClick={function(){setVerGrupo({rpId:rp.id,rpNombre:rp.nombre,group:grp});}}>📂 Ver grupo</Btn>{(role==='sup'||role==='cds'||role==='admin')&&<Btn small variant='outline' style={{borderColor:A,color:A}} onClick={function(){var rOnly4=!(user.id===rp.supId);setVerSupForm({rpId:rp.id,rpNombre:rp.nombre,groupNombre:grp.nombre,tipo:'supRP',readOnly:rOnly4});}}>👤 Sup. RP</Btn>}{(role==='sup'||role==='cds'||role==='admin')&&<Btn small variant='outline' style={{borderColor:'#154E78',color:'#154E78'}} onClick={function(){var rOnly3=!(user.id===rp.supId);setVerSupForm({rpId:rp.id,rpNombre:rp.nombre,groupNombre:grp.nombre,tipo:'supGP',readOnly:rOnly3});}}>👁 Visita GP</Btn>}</div>}</Card>);})})()}
         </div>
       )}
-      {tab==='cadena'&&(<div style={{padding:'0 0 100px'}}><Cadena user={user} supMeetings={p.supMeetings} onAdd={p.onAddSup} onUpdate={p.onUpdSup} users={dynUsers}/></div>)}
+      {tab==='cadena'&&(<div style={{padding:'0 0 100px'}}><Cadena user={user} supMeetings={p.supMeetings} onAdd={p.onAddSup} onUpdate={p.onUpdSup} users={dynUsers} onOpenSupForm={function(rpId2,tipo){var grp2=dynGroups.find(function(g){return g.rpId===rpId2;});var rOnly2=!(user.id===rpId2||dynUsers.some(function(u){return u.id===rpId2&&u.supId===user.id;}));setVerSupForm({rpId:rpId2,rpNombre:(dynUsers.find(function(u){return u.id===rpId2;})||{}).nombre||'',groupNombre:grp2?grp2.nombre:'',tipo:tipo,readOnly:rOnly2});}}/></div>)}
     </div>
   );
 }
@@ -1758,6 +2170,8 @@ export default function App(){
   var [meetings,setMeetings]=useState([]);
   var [allPlans,setAllPlans]=useState({});
   var [allAtt,setAllAtt]=useState({});
+  var [allSupForms,setAllSupForms]=useState({});
+  function saveSupForm(rpId,sem,tipo,data){setAllSupForms(function(prev){var rpData=Object.assign({},prev[rpId]||{});var semData=Object.assign({},rpData[sem]||{});semData[tipo]=data;rpData[sem]=semData;return Object.assign({},prev,{[rpId]:rpData});});}
   var [supMtgs,setSupMtgs]=useState([]);
   var [agFor,setAgFor]=useState(null);
   var [dynUsers,setDynUsers]=useState(USERS.slice());
@@ -1833,10 +2247,10 @@ export default function App(){
     agendar:  <Agendar user={cu} group={group} meetings={meetings} onAdd={addM} onSyncProg={syncPPGProg} agFor={agFor} setFor={setAgFor} go={setSc} users={dynUsers} sem={activePeriod}/>,
     registrar:<Registrar user={cu} meetings={meetings} onUpd={updM}/>,
     progreso: <Progreso user={cu} group={group} meetings={meetings} users={dynUsers} sem={activePeriod}/>,
-    sup:      <Supervision key={supTab} user={cu} meetings={meetings} allPlans={allPlans} allAtt={allAtt} supMeetings={supMtgs} onAddSup={addSM} onUpdSup={updSM} users={dynUsers} groups={dynGroups} initTab={supTab} sem={activePeriod}/>,
+    sup:      <Supervision key={supTab} user={cu} meetings={meetings} allPlans={allPlans} allAtt={allAtt} supMeetings={supMtgs} onAddSup={addSM} onUpdSup={updSM} users={dynUsers} groups={dynGroups} initTab={supTab} sem={activePeriod} allSupForms={allSupForms} onSaveSupForm={saveSupForm}/>,
     servicios:<Servicios user={cu} allPlans={allPlans} users={dynUsers} groups={dynGroups} sem={activePeriod}/>,
     admin:    <Admin user={cu} users={dynUsers} groups={dynGroups} onAddUser={addUser} onUpdUser={updUser} onAddGroup={addGroup} onUpdGroup={updGroup} periods={periods} activePeriod={activePeriod} pendingPeriodId={pendingPeriodId} activatedGPs={activatedGPs} onCreatePeriod={createPeriod} onClearPending={clearPending} allUsers={dynUsers} ppcGoals={ppcGoals} onSetPpcGoals={setPpcGoals}/>,
-    misup:    <MiSupervision user={cu} supMeetings={supMtgs} users={dynUsers} sem={activePeriod}/>,
+    misup:    <MiSupervision user={cu} supMeetings={supMtgs} users={dynUsers} sem={activePeriod} allSupForms={allSupForms}/>,
   };
 
   return (
