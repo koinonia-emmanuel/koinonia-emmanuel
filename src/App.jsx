@@ -43,11 +43,11 @@ const SECCIONES_SUPRP_B=[
   {key:'identidad',title:'I.  Identidad EDE y Emmanuel',items:['¿Los hermanos/as de tu GP conocen la profecía del Baluarte?','¿Conocen nuestra profecía fundacional?','¿Conocen el Plan Pastoral Comunitario (PPC)?']},
   {key:'planGP',   title:'II.  Plan Pastoral del Grupo',items:['¿Tu grupo tiene un Plan Pastoral (PPG)?','¿Revisan el avance del Plan Pastoral entre todos?','¿Poseen una programación semestral de reuniones del GP?','¿Cada miembro del grupo posee un Plan Pastoral Personal (PPP)?','¿Cada hermano/a conoce su PPP?']},
   {key:'sincoEses',title:'III.  Las 5 S\'s del Grupo',es5S:true,items:[
-    {id:'semanalidad',  label:'Semanalidad',   desc:'Asistencia y puntualidad a las reuniones del GP y comunitarias'},
-    {id:'sinceridad',   label:'Sinceridad',    desc:'Nivel de participación, apertura y profundidad en el compartir'},
-    {id:'seriedad',     label:'Seriedad',      desc:'Capacidad de tomar las cosas con seriedad sin menoscabar la naturalidad'},
-    {id:'sigilo',       label:'Sigilo',        desc:'Lealtad mutua: lo que se comparte en el GP no se comenta fuera de él'},
-    {id:'subordinacion',label:'Subordinación', desc:'Respuesta de los miembros a las orientaciones y dirección del RP'},
+    {id:'semanalidad',  label:'Semanalidad',   desc:'Asistencia y puntualidad de los miembros a las reuniones del GP y a las reuniones comunitarias'},
+    {id:'sinceridad',   label:'Sinceridad',    desc:'Nivel de participación, apertura y profundidad en el compartir del grupo'},
+    {id:'seriedad',     label:'Seriedad',      desc:'Capacidad de tomar las cosas con seriedad sin menoscabar la naturalidad y la fraternidad'},
+    {id:'sigilo',       label:'Sigilo',        desc:'Lealtad mutua: lo que sucede y se comparte en el GP no se comenta fuera de él'},
+    {id:'subordinacion',label:'Subordinación', desc:'Respuesta personal de los miembros a las orientaciones y la dirección del RP'},
   ]},
   {key:'relaciones',title:'IV.  Relaciones entre los miembros del Grupo',items:['¿Las relaciones entre los hermanos/as del grupo son cordiales y fraternas?','¿Los hermanos/as del GP se animan unos a otros?','¿Tienen actividades que fomentan la fraternidad dentro del grupo?','¿Hay sigilo y confidencialidad entre los hermanos/as de tu grupo?','¿Los hermanos/as del GP comparten lo que está pasando en su vida?']},
   {key:'vidaCristo',title:'V.  Vida en Cristo del Grupo',items:['¿Los hermanos/as de tu GP reconocen a nuestro Señor Jesús como su Señor y Salvador?','¿En tu grupo los hermanos/as interceden unos por otros?','¿Se motivan unos a otros en la Fe?','¿Los hermanos/as de tu GP conocen la Palabra de Dios, la estudian y la usan en sus vidas?','¿En situaciones de crisis hacen batalla espiritual?']},
@@ -551,7 +551,7 @@ function printSupervision(rpNombre,groupNombre,supRP,supGP,miembros,sem){
     var ig=supRP.integ||{};var igKeys=Object.keys(ig);
     if(igKeys.length){H+='<h3>Cuadro de Integrantes</h3><table><thead><tr><th style="width:30%">Hermano/a</th><th>Anotaciones generales</th></tr></thead><tbody>';(miembros||[]).filter(function(m){return !m.rpOverride;}).forEach(function(m){var iv=ig[m.id]||{};H+='<tr><td><strong>'+m.nombre+'</strong></td><td>'+(iv.anotaciones||'—')+'</td></tr>';});H+='</tbody></table>';}
     var ac=supRP.acciones||{};H+='<h3>Acciones</h3><table><tbody>';
-    [['🔴 Corregir',ac.corregir],['🟡 Prevenir',ac.prevenir],['🟢 Fomentar',ac.fomentar],['🔵 Potenciar',ac.potenciar],['📝 Obs. RS',ac.obsRS]].forEach(function(r){if(r[1])H+='<tr><td style="width:22%;font-weight:bold;color:#0A3D62">'+r[0]+'</td><td>'+r[1]+'</td></tr>';});
+    [['🔴 ¿Debes corregir algo?',ac.corregir],['🟡 ¿Debes prevenir algo?',ac.prevenir],['🟢 ¿Debes fomentar algo?',ac.fomentar],['🔵 ¿Qué puedes potenciar en tu GP?',ac.potenciar],['📝 Obs. RS',ac.obsRS]].forEach(function(r){if(r[1])H+='<tr><td style="width:22%;font-weight:bold;color:#0A3D62">'+r[0]+'</td><td>'+r[1]+'</td></tr>';});
     H+='</tbody></table>';
     if(supRP.reuniones&&supRP.reuniones.length){H+='<h3>Reuniones Sup. RP</h3><table><thead><tr><th style="width:22%">Fecha</th><th>Notas</th></tr></thead><tbody>';supRP.reuniones.forEach(function(r){H+='<tr><td>'+fmt(r.fecha)+'</td><td>'+(r.notas||'—')+'</td></tr>';});H+='</tbody></table>';}
   }
@@ -712,7 +712,7 @@ function HomeRP(p){
             <span style={{fontSize:28,flexShrink:0}}>🔔</span>
             <div style={{flex:1}}>
               <p style={{margin:'0 0 4px',fontWeight:700,fontSize:18}}>Nuevo periodo disponible</p>
-              <p style={{margin:'0 0 12px',fontSize:16,opacity:0.9}}><strong>{p.pendingPeriodId}</strong> — Al activar, se heredarán los integrantes y las áreas de trabajo. Reuniones y programación empezarán en cero.</p>
+              <p style={{margin:'0 0 12px',fontSize:16,opacity:0.9}}><strong>{p.pendingPeriodId}</strong> — Al activar, tu PPG y los PPPs se heredan completos. La programación de pastoreos y las reuniones del GP empezarán en cero. Podrás renovar el PPG desde la pestaña Mi Grupo cuando lo necesites.</p>
               <button onClick={function(){if(p.onActivateGP)p.onActivateGP(user.id);}} style={{background:'#B5451B',border:'none',borderRadius:8,color:'#fff',fontWeight:700,fontSize:17,padding:'8px 18px',cursor:'pointer'}}>✅ Activar mi PPG para {p.pendingPeriodId}</button>
             </div>
           </div>
@@ -817,7 +817,7 @@ function HomeSup(p){
             <span style={{fontSize:28,flexShrink:0}}>🔔</span>
             <div style={{flex:1}}>
               <p style={{margin:'0 0 4px',fontWeight:700,fontSize:18}}>Nuevo periodo disponible</p>
-              <p style={{margin:'0 0 12px',fontSize:16,opacity:0.9}}><strong>{p.pendingPeriodId}</strong> — Al activar, se heredarán los integrantes y las áreas de trabajo del PPG. Reuniones y programación empezarán en cero.</p>
+              <p style={{margin:'0 0 12px',fontSize:16,opacity:0.9}}><strong>{p.pendingPeriodId}</strong> — Al activar, tu PPG y los PPPs se heredan completos. La programación de pastoreos y las reuniones del GP empezarán en cero. Podrás renovar el PPG desde la pestaña Mi Grupo cuando lo necesites.</p>
               <button onClick={function(){if(p.onActivateGP)p.onActivateGP(user.id);}} style={{background:'#B5451B',border:'none',borderRadius:8,color:'#fff',fontWeight:700,fontSize:17,padding:'8px 18px',cursor:'pointer'}}>✅ Activar mi PPG para {p.pendingPeriodId}</button>
             </div>
           </div>
@@ -1315,21 +1315,53 @@ function PPGForm(p){
   var [reuns,setReuns]=useState(ppg.reuniones&&ppg.reuniones.length?ppg.reuniones:[{id:uid(),fecha:'',actividad:'',tema:'',comentarios:''}]);
   var [evalBien,setEvalBien]=useState(ppg.evalBien||'');
   var [evalMejorar,setEvalMejorar]=useState(ppg.evalMejorar||'');
+  var anioActual=String(new Date().getFullYear());
+  var [vigencia,setVigencia]=useState(ppg.vigencia||anioActual);
   var [ok,setOk]=useState(false);
   var [showSugg,setShowSugg]=useState(false);
+  var [confirmRenovar,setConfirmRenovar]=useState(false);
   function uI(i,f,v){var n=integ.slice();n[i]=Object.assign({},n[i]);n[i][f]=v;setInteg(n);}
   function uA(i,f,v){var n=areas.slice();n[i]=Object.assign({},n[i]);n[i][f]=v;setAreas(n);}
   function uP(mid,mes,v){var n=Object.assign({},prog);n[mid]=Object.assign({},n[mid]||{});n[mid][mes]=v;setProg(n);}
   function uR(i,f,v){var n=reuns.slice();n[i]=Object.assign({},n[i]);n[i][f]=v;setReuns(n);}
   function cellSt(memberId,mes,dv){if(!dv)return null;var gRpId=group?group.rpId:null;var mtg=(p.meetings||[]).find(function(m){return m.rpId===gRpId&&m.miembroId===memberId&&m.fecha&&MESES_FULL[parseInt(m.fecha.slice(5,7))-1]===mes;});if(mtg&&mtg.realizada)return'done';if(dv<TODAY)return'late';return'pending';}
   function cellStyle(st){if(st==='done')return{background:G+'22',border:'1.5px solid '+G+'66',borderRadius:6};if(st==='late')return{background:R+'15',border:'1.5px solid '+R+'55',borderRadius:6};if(st==='pending')return{background:'#EBF8FF',border:'1.5px solid #90CDF4',borderRadius:6};return{};}
-  function save(){p.onSave({integ:integ,areas:areas,prog:prog,reuniones:reuns,evalBien:evalBien,evalMejorar:evalMejorar,mesesProg:mesesProg});setOk(true);setTimeout(function(){setOk(false);},2000);}
+  function save(){p.onSave({integ:integ,areas:areas,prog:prog,reuniones:reuns,evalBien:evalBien,evalMejorar:evalMejorar,mesesProg:mesesProg,vigencia:vigencia});setOk(true);setTimeout(function(){setOk(false);},2000);}
+  function renovar(){
+    var nuevoAnio=anioActual;
+    setInteg(mb.map(function(m){return({id:m.id,nombre:m.nombre,compromiso:'',cumple:'',aniv:'',curso:''});}));
+    setAreas([{id:uid(),area:'',meta:''}]);
+    setProg({});setReuns([{id:uid(),fecha:'',actividad:'',tema:'',comentarios:''}]);
+    setMesesProg(MESES_SEM.slice());setEvalBien('');setEvalMejorar('');
+    setVigencia(nuevoAnio);setConfirmRenovar(false);
+  }
   var sH={fontSize:18,fontWeight:700,color:P,margin:'16px 0 8px',paddingBottom:4,borderBottom:'2px solid '+P+'33'};
   var thS={background:P+'18',color:P,fontSize:15,fontWeight:700,padding:'5px 6px',textAlign:'left',borderBottom:'1px solid '+BO};
   var tdS={padding:'4px 6px',borderBottom:'1px solid '+BO+'55',verticalAlign:'middle',fontSize:16};
   return (
     <div>
-      <div style={{background:P+'10',borderLeft:'4px solid '+A,borderRadius:'0 8px 8px 0',padding:'10px 14px',marginBottom:12}}><p style={{margin:0,fontSize:17,color:P,fontStyle:'italic',lineHeight:1.6}}>"Infundiré mi Espíritu en ustedes. Manténganse en mi Palabra y serán verdaderamente mis discípulos."</p><p style={{margin:'4px 0 0',fontSize:16,color:MU}}>Ez 36,26-27 · Jn 8,31-32</p><p style={{margin:'7px 0 0',fontSize:15,color:P,fontWeight:700}}>Período: {semLabel(p.sem||CSEM)}</p></div>
+      <div style={{background:P+'10',borderLeft:'4px solid '+A,borderRadius:'0 8px 8px 0',padding:'10px 14px',marginBottom:12}}>
+        <p style={{margin:0,fontSize:17,color:P,fontStyle:'italic',lineHeight:1.6}}>"Infundiré mi Espíritu en ustedes. Manténganse en mi Palabra y serán verdaderamente mis discípulos."</p>
+        <p style={{margin:'4px 0 0',fontSize:16,color:MU}}>Ez 36,26-27 · Jn 8,31-32</p>
+        <div style={{marginTop:8,display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:6}}>
+          <span style={{fontSize:15,color:P,fontWeight:700}}>Período: {semLabel(p.sem||CSEM)}</span>
+          <span style={{fontSize:14,background:P,color:'#fff',borderRadius:20,padding:'2px 10px',fontWeight:700}}>📅 Vigencia del plan: {vigencia}</span>
+        </div>
+      </div>
+      {confirmRenovar?(
+        <div style={{background:'#FFF5F5',border:'2px solid '+R,borderRadius:10,padding:'14px 16px',marginBottom:12}}>
+          <p style={{margin:'0 0 6px',fontWeight:700,fontSize:17,color:R}}>⚠️ ¿Renovar el PPG desde cero?</p>
+          <p style={{margin:'0 0 12px',fontSize:16,color:'#2D3748'}}>Se borrarán todos los integrantes, áreas, programación y evaluación. Esta acción no se puede deshacer hasta que guardes el nuevo plan.</p>
+          <div style={{display:'flex',gap:8}}>
+            <button onClick={renovar} style={{background:R,border:'none',borderRadius:8,color:'#fff',fontWeight:700,fontSize:16,padding:'8px 18px',cursor:'pointer'}}>Sí, renovar</button>
+            <button onClick={function(){setConfirmRenovar(false);}} style={{background:'none',border:'1.5px solid #CBD5E0',borderRadius:8,color:MU,fontWeight:600,fontSize:16,padding:'8px 18px',cursor:'pointer'}}>Cancelar</button>
+          </div>
+        </div>
+      ):(
+        <div style={{display:'flex',justifyContent:'flex-end',marginBottom:4}}>
+          <button onClick={function(){setConfirmRenovar(true);}} style={{background:'none',border:'1px solid '+W,borderRadius:8,color:W,fontWeight:600,fontSize:15,padding:'5px 12px',cursor:'pointer'}}>🔄 Renovar PPG (nuevo año pastoral)</button>
+        </div>
+      )}
       <p style={sH}>1. Integrantes del Grupo</p>
       <div style={{overflowX:'auto'}}><table style={{width:'100%',borderCollapse:'collapse'}}><thead><tr><th style={thS}>Nombre</th><th style={thS}>Compromiso</th><th style={thS}>Cumpleaños</th><th style={thS}>Aniversario</th><th style={thS}>Curso</th></tr></thead><tbody>{integ.map(function(m,i){return(<tr key={m.id}><td style={tdS}><strong>{m.nombre}</strong></td><td style={tdS}><select value={m.compromiso} onChange={function(e){uI(i,'compromiso',e.target.value);}} style={inp({minWidth:100,padding:'3px 4px'})}><option value=''>—</option><option>Inicial</option><option>En Camino</option><option>Solemne</option></select></td><td style={tdS}><input type='date' value={m.cumple} onChange={function(e){uI(i,'cumple',e.target.value);}} style={inp({minWidth:100})}/></td><td style={tdS}><input type='date' value={m.aniv} onChange={function(e){uI(i,'aniv',e.target.value);}} style={inp({minWidth:100})}/></td><td style={tdS}><select value={m.curso} onChange={function(e){uI(i,'curso',e.target.value);}} style={inp({minWidth:160,padding:'3px 4px'})}><option value=''>— Sin asignar —</option><option>Fundamentos I</option><option>Relaciones Personales Cristianas</option><option>IVC o Cómo recibir Pastoreo</option><option>Fruto del Espíritu Santo</option><option>Comunidad y Familia</option><option>Emociones en la Vida Cristiana</option><option>F2: Matrimonios</option><option>F2: Solteros "Entrando a nuestro estado de vida"</option><option>F2: H. Casados / F2: M. Casadas</option><option>F2: H. Solteros / F2: M. Solteras</option><option>Paternidad Cristiana</option><option>F3: Nuestro Llamado</option><option>F3: Visión para la Cdad. Cristiana</option><option>Servicio Cristiano</option><option>F3: Nuestro Modo de Vida</option><option>Carácter Masculino / Carácter Femenino</option><option>F4: Viviendo en Comunidad Cristiana</option><option>Normas y Políticas Comunitarias</option><option>Doctrina Cristiana</option><option>La Constitución de Emmanuel / Nuestra Espiritualidad Carismática</option><option>Doctrina y Ecumenismo - Versión Católica</option><option>Doctrina y Ecumenismo - Versión Ecuménica</option></select></td></tr>);})}</tbody></table></div>
       <p style={sH}>2. Plan Pastoral Comunitario (PPC)</p>
@@ -1390,11 +1422,23 @@ function PPPForm(p){
   var [autoeval,setAutoeval]=useState(initA);
   var [areas,setAreas]=useState(saved.areas||[{a:'',m:'',ac:''},{a:'',m:'',ac:''},{a:'',m:'',ac:''},{a:'',m:'',ac:''},{a:'',m:'',ac:''}]);
   var [seg,setSeg]=useState(saved.seguimiento||[{f:'',n:''},{f:'',n:''},{f:'',n:''},{f:'',n:''},{f:'',n:''}]);
+  var anioActualPPP=String(new Date().getFullYear());
+  var [vigenciaPPP,setVigenciaPPP]=useState(saved.vigencia||anioActualPPP);
   var [ok,setOk]=useState(false);
+  var [confirmRenovarPPP,setConfirmRenovarPPP]=useState(false);
   function uAuto(sec,i,field,val){var n=Object.assign({},autoeval);n[sec]=n[sec].slice();n[sec][i]=Object.assign({},n[sec][i]);n[sec][i][field]=val;setAutoeval(n);}
   function uArea(i,f,v){var n=areas.slice();n[i]=Object.assign({},n[i]);n[i][f]=v;setAreas(n);}
   function uSeg(i,f,v){var n=seg.slice();n[i]=Object.assign({},n[i]);n[i][f]=v;setSeg(n);}
-  function save(){p.onSave({info:info,autoeval:autoeval,areas:areas,seguimiento:seg});setOk(true);setTimeout(function(){setOk(false);},2000);}
+  function save(){p.onSave({info:info,autoeval:autoeval,areas:areas,seguimiento:seg,vigencia:vigenciaPPP});setOk(true);setTimeout(function(){setOk(false);},2000);}
+  function renovarPPP(){
+    var initANew={};
+    SECCIONES_PPP.forEach(function(sec){initANew[sec.key]=sec.items.map(function(item){return({item:item,puntaje:'',comentario:''});});});
+    setAutoeval(initANew);
+    setAreas([{a:'',m:'',ac:''},{a:'',m:'',ac:''},{a:'',m:'',ac:''},{a:'',m:'',ac:''},{a:'',m:'',ac:''}]);
+    setSeg([{f:'',n:''},{f:'',n:''},{f:'',n:''},{f:'',n:''},{f:'',n:''}]);
+    setVigenciaPPP(anioActualPPP);
+    setConfirmRenovarPPP(false);
+  }
   var sH={fontSize:18,fontWeight:700,color:P,margin:'16px 0 8px',paddingBottom:4,borderBottom:'2px solid '+P+'33'};
   var thS={background:P+'18',color:P,fontSize:15,fontWeight:700,padding:'5px 6px',textAlign:'left',borderBottom:'1px solid '+BO};
   var tdS={padding:'4px 6px',borderBottom:'1px solid '+BO+'55',verticalAlign:'middle',fontSize:16};
@@ -1402,7 +1446,27 @@ function PPPForm(p){
   SECCIONES_PPP.forEach(function(sec){(autoeval[sec.key]||[]).forEach(function(row){if(row.puntaje==='1')criticas.push({sec:sec.title.split('.')[1]?sec.title.split('.')[1].trim():sec.title,item:row.item});if(row.puntaje==='2')importantes.push({sec:sec.title.split('.')[1]?sec.title.split('.')[1].trim():sec.title,item:row.item});});});
   return (
     <div>
-      <div style={{background:P+'10',borderLeft:'4px solid '+A,borderRadius:'0 8px 8px 0',padding:'10px 14px',marginBottom:12}}><p style={{margin:0,fontWeight:700,fontSize:18,color:P}}>Plan Pastoral Individual</p><p style={{margin:'2px 0 0',fontSize:16,color:MU}}>Período: {semLabel(p.sem||CSEM)}</p></div>
+      <div style={{background:P+'10',borderLeft:'4px solid '+A,borderRadius:'0 8px 8px 0',padding:'10px 14px',marginBottom:12}}>
+        <p style={{margin:0,fontWeight:700,fontSize:18,color:P}}>Plan Pastoral Individual</p>
+        <div style={{marginTop:6,display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:6}}>
+          <span style={{fontSize:16,color:MU}}>Período: {semLabel(p.sem||CSEM)}</span>
+          <span style={{fontSize:14,background:P,color:'#fff',borderRadius:20,padding:'2px 10px',fontWeight:700}}>📅 Vigencia: {vigenciaPPP}</span>
+        </div>
+      </div>
+      {confirmRenovarPPP?(
+        <div style={{background:'#FFF5F5',border:'2px solid '+R,borderRadius:10,padding:'14px 16px',marginBottom:12}}>
+          <p style={{margin:'0 0 6px',fontWeight:700,fontSize:17,color:R}}>⚠️ ¿Renovar el PPP desde cero?</p>
+          <p style={{margin:'0 0 12px',fontSize:16,color:'#2D3748'}}>Se borrará la autoevaluación, las áreas de pastoreo y el seguimiento. Los datos del hermano/a se conservan.</p>
+          <div style={{display:'flex',gap:8}}>
+            <button onClick={renovarPPP} style={{background:R,border:'none',borderRadius:8,color:'#fff',fontWeight:700,fontSize:16,padding:'8px 18px',cursor:'pointer'}}>Sí, renovar</button>
+            <button onClick={function(){setConfirmRenovarPPP(false);}} style={{background:'none',border:'1.5px solid #CBD5E0',borderRadius:8,color:MU,fontWeight:600,fontSize:16,padding:'8px 18px',cursor:'pointer'}}>Cancelar</button>
+          </div>
+        </div>
+      ):(
+        <div style={{display:'flex',justifyContent:'flex-end',marginBottom:4}}>
+          <button onClick={function(){setConfirmRenovarPPP(true);}} style={{background:'none',border:'1px solid '+W,borderRadius:8,color:W,fontWeight:600,fontSize:15,padding:'5px 12px',cursor:'pointer'}}>🔄 Renovar PPP (nuevo año pastoral)</button>
+        </div>
+      )}
       <Card style={{marginBottom:10}}>
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:6,fontSize:17}}>
           <div><span style={{color:MU,fontWeight:600}}>Nombre: </span><strong>{mb.nombre}</strong></div>
@@ -1808,7 +1872,21 @@ function SupRPForm(p){
         );
       })()}
       {/* Cuadro de Integrantes */}
-      <p style={sH}>👥 Cuadro de Integrantes</p>
+      <p style={sH}>👥 IX. Cuadro resumen de los Integrantes del GP</p>
+      <div style={{background:P+'08',border:'1px solid '+P+'22',borderRadius:8,padding:'10px 14px',marginBottom:10,fontSize:14,color:MU,lineHeight:1.6}}>
+        <p style={{margin:'0 0 6px',fontWeight:700,color:P,fontSize:15}}>Anotar situaciones especiales, necesidades y compromisos de cada hermano/a:</p>
+        <ul style={{margin:0,paddingLeft:18}}>
+          {['Actitudes sobre la vida comunitaria.',
+            'Nivel de comprensión y aceptación de las Enseñanzas de la Comunidad.',
+            'Fidelidad al Aporte del 10% y otros compromisos económicos con la Comunidad.',
+            'Apertura y disponibilidad al servicio.',
+            'Actitud hacia la autoridad: Coordinadores, Líderes, Programas y Ministerios.',
+            'Relación con los demás hermanos en el GP.',
+            'Evaluación de cara a la toma del siguiente nivel del Compromiso Básico.',
+            'Necesidades o dificultades personales (familia, finanzas, trabajo, oración).'
+          ].map(function(t,i){return <li key={i} style={{marginBottom:2}}>{t}</li>;})}
+        </ul>
+      </div>
       {miembros.length===0&&<p style={{fontSize:15,color:MU,fontStyle:'italic'}}>Sin integrantes registrados.</p>}
       {miembros.map(function(m){var iv=d.integ[m.id]||{};return(
         <Card key={m.id} style={{marginBottom:8,borderLeft:'3px solid '+A}}>
@@ -1818,8 +1896,8 @@ function SupRPForm(p){
         </Card>
       );})}
       {/* Acciones */}
-      <p style={sH}>🎯 Acciones a partir de la Supervisión</p>
-      {[['corregir','🔴 Corregir en el GP'],['prevenir','🟡 Prevenir en el GP'],['fomentar','🟢 Fomentar en el GP'],['potenciar','🔵 Potenciar en el GP'],['obsRS','📝 Observaciones del RS']].map(function(ac){var v=d.acciones[ac[0]]||'';return(
+      <p style={sH}>🎯 X. Acciones a partir de la Supervisión</p>
+      {[['corregir','🔴 ¿Debes corregir algo?'],['prevenir','🟡 ¿Debes prevenir algo?'],['fomentar','🟢 ¿Debes fomentar algo?'],['potenciar','🔵 ¿Qué puedes potenciar en tu GP?'],['obsRS','📝 Observaciones del RS']].map(function(ac){var v=d.acciones[ac[0]]||'';return(
         <div key={ac[0]} style={{marginBottom:8}}>
           <div style={{fontSize:16,color:MU,fontWeight:600,marginBottom:3}}>{ac[1]}</div>
           {readOnly?(<div style={{fontSize:15,padding:'5px 8px',background:BG,borderRadius:7,minHeight:28}}>{v||'—'}</div>):(<textarea value={v} onChange={function(e){updAcc(ac[0],e.target.value);}} style={inp({minHeight:48,resize:'vertical',fontSize:15})}/>)}
@@ -2197,11 +2275,13 @@ export default function App(){
     setAllPlans(function(prev){
       var rp=Object.assign({},prev[rpId]||{ppg:{},miembros:{}});
       var oldPPG=rp.ppg||{};
-      var newPPG={
-        integ:(oldPPG.integ||[]).map(function(m){return Object.assign({},m,{compromiso:m.compromiso||'',cumple:m.cumple||'',aniv:m.aniv||'',curso:m.curso||''});}),
+      var anio=activePeriod?activePeriod.split('-')[0]:String(new Date().getFullYear());
+      var newPPG=Object.assign({},oldPPG,{
+        integ:(oldPPG.integ||[]).map(function(m){return Object.assign({},m);}),
         areas:(oldPPG.areas||[]).map(function(a){return Object.assign({},a);}),
-        prog:{},reuniones:[],mesesProg:[]
-      };
+        prog:{},reuniones:[],mesesProg:[],
+        vigencia:oldPPG.vigencia||anio
+      });
       return Object.assign({},prev,{[rpId]:Object.assign({},rp,{ppg:newPPG})});
     });
   }
